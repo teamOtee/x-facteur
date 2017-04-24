@@ -1,4 +1,4 @@
-# X Facteur
+# X Facteur (groupe I1.3)
 
 *X Facteur* est un logiciel codé en *Java*. Il est réalisé à l’occasion du projet de second semestre
 de DUT Informatique. Le but du logiciel est une implémentation du *problème du voyageur de commerce*
