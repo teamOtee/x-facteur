@@ -4,16 +4,39 @@ import java.net.URLEncoder;
 import java.io.UnsupportedEncodingException;
 import java.io.InputStream;
 import java.util.Scanner;
+import java.util.ArrayList;
+import org.json.JSONObject;
 
 public class testHTTPget {
 	public static void main(String[] args) {
+		//get origins and dest from user input
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Donnez une liste de lieux :");
+		ArrayList<String> places = new ArrayList<String>();
+		String place = "";
+		while (!(place = sc.nextLine()).isEmpty()) {
+			places.add(place);
+		}
+
+		System.out.println("Listes des distances");
+		System.out.println("====================");
+		double[][] distances = getDistanceMatrix(places);
+		for (int i = 0; i < places.size(); i++) {
+			for (int j = 0; j < places.size(); j++) {
+				System.out.println(places.get(i) + " --> " + places.get(j) + ": " + distances[i][j] + " km");
+			}
+		}
+	}
+
+	public static double[][] getDistanceMatrix(ArrayList<String> places) {
+		String origins = String.join("|", places).replace(" ", "+");
+		String destinations = origins;
+
 		//config constants
 		final String charset = java.nio.charset.StandardCharsets.UTF_8.name();
 
 		//filling and formatting request
-		String baseURL = "https://maps.googleapis.com/maps/api/distancematrix/json";
-		String origins = "Lannion|Châlons+en+Champagne",
-			destinations = "Lannion|Châlons+en+Champagne",
+		String baseURL = "https://maps.googleapis.com/maps/api/distancematrix/json",
 			language = "fr-FR",
 			units = "metric",
 			mode = "driving";
@@ -43,9 +66,19 @@ public class testHTTPget {
 		}
 
 		//displaying response on stdout
-		try (Scanner sc = new Scanner(response)) {
-			String responseBody = sc.useDelimiter("\\A").next();
-			System.out.println(responseBody);
+		double[][] distances = new double[places.size()][places.size()];
+		try (Scanner resScan = new Scanner(response)) {
+			String responseBody = resScan.useDelimiter("\\A").next();
+			JSONObject obj = new JSONObject(responseBody);
+			for (int i = 0; i < places.size(); i++) {
+				for (int j = 0; j < places.size(); j++) {
+					distances[i][j] = new Double(obj.query("/rows/" + i + "/elements/" + j + "/distance/value").toString()).doubleValue() / 1e3;
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("Erreur de lecture du contenu !");
+		} finally {
+			return distances;
 		}
 	}
 }
