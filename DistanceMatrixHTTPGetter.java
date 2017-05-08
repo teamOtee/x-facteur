@@ -4,31 +4,12 @@ import java.net.URLEncoder;
 import java.io.UnsupportedEncodingException;
 import java.io.InputStream;
 import java.util.Scanner;
+import java.util.List;
 import java.util.ArrayList;
 import org.json.JSONObject;
 
-public class testHTTPget {
-	public static void main(String[] args) {
-		//get origins and dest from user input
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Donnez une liste de lieux :");
-		ArrayList<String> places = new ArrayList<String>();
-		String place = "";
-		while (!(place = sc.nextLine()).isEmpty()) {
-			places.add(place);
-		}
-
-		System.out.println("Listes des distances");
-		System.out.println("====================");
-		double[][] distances = getDistanceMatrix(places);
-		for (int i = 0; i < places.size(); i++) {
-			for (int j = 0; j < places.size(); j++) {
-				System.out.println(places.get(i) + " --> " + places.get(j) + ": " + distances[i][j] + " km");
-			}
-		}
-	}
-
-	public static double[][] getDistanceMatrix(ArrayList<String> places) {
+public class DistanceMatrixHTTPGetter {
+	public static double[][] getDistanceMatrix(List<String> places) {
 		String origins = String.join("|", places).replace(" ", "+");
 		String destinations = origins;
 
@@ -37,13 +18,15 @@ public class testHTTPget {
 
 		//filling and formatting request
 		String baseURL = "https://maps.googleapis.com/maps/api/distancematrix/json",
+			apiKey = "AIzaSyA5FMd2HKX15GZJdhWSbQh7Lu2PzmSkozI",
 			language = "fr-FR",
 			units = "metric",
 			mode = "driving";
 		String queryURL = null;
 		try {
-			queryURL = String.format("%s?origins=%s&destinations=%s&language=%s&units=%s&mode=%s",
+			queryURL = String.format("%s?key=%s&origins=%s&destinations=%s&language=%s&units=%s&mode=%s",
 				baseURL,
+				URLEncoder.encode(apiKey, charset),
 				URLEncoder.encode(origins, charset),
 				URLEncoder.encode(destinations, charset),
 				URLEncoder.encode(language, charset),
@@ -72,13 +55,33 @@ public class testHTTPget {
 			JSONObject obj = new JSONObject(responseBody);
 			for (int i = 0; i < places.size(); i++) {
 				for (int j = 0; j < places.size(); j++) {
-					distances[i][j] = new Double(obj.query("/rows/" + i + "/elements/" + j + "/distance/value").toString()).doubleValue() / 1e3;
+					distances[i][j] = new Double(obj.query("/rows/" + i + "/elements/" + j + "/distance/value").toString()).doubleValue() * 1e-3;
 				}
 			}
 		} catch (Exception e) {
 			System.out.println("Erreur de lecture du contenu !");
 		} finally {
 			return distances;
+		}
+	}
+
+	public static void CLITest() {
+		//get origins and dest from user input
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Donnez une liste de lieux :");
+		List<String> places = new ArrayList<String>();
+		String place = "";
+		while (!(place = sc.nextLine()).isEmpty()) {
+			places.add(place);
+		}
+
+		System.out.println("Listes des distances");
+		System.out.println("====================");
+		double[][] distances = getDistanceMatrix(places);
+		for (int i = 0; i < places.size(); i++) {
+			for (int j = 0; j < places.size(); j++) {
+				System.out.println(places.get(i) + " --> " + places.get(j) + ": " + distances[i][j] + " km");
+			}
 		}
 	}
 }
