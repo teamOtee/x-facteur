@@ -56,7 +56,6 @@ public class DistanceMatrixHTTPGetter {
 			for (int i = 0; i < addresses.size(); i++) {
 				for (int j = 0; j < addresses.size(); j++) {
 					distances[i][j] = new Double(obj.query("/rows/" + i + "/elements/" + j + "/distance/value").toString()).doubleValue() * 1e-3;
-					distances[i][j] = obj.getDouble("/rows/" + i + "/elements/" + j + "/distance/value") * 1e-3;
 				}
 			}
 		} catch (Exception e) {

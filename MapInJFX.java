@@ -40,8 +40,13 @@ public class MapInJFX extends Application {
 		addresses.add("Rennes");
 		addresses.add("Châlons-en-Champagne");
 		addresses.add("Mont Saint Michel");
-		MapView mapView = new MapView(FXCollections.observableArrayList("IUT de Lannion", "Mairie de Lannion", "Angers", "Rennes", "Châlons-en-Champagne", "Mont Saint Michel"));
+
+		MapView mapView = new MapView(addresses);
 		mapView.show();
+
+		double[][] distances = DistanceMatrixHTTPGetter.getDistanceMatrix(addresses);
+		mapView.setDistances(distances);
+		mapView.setData();
 	}
 }
 
@@ -56,24 +61,16 @@ class MapView extends Stage {
 	protected Button rightBtn = new Button();
 
 	public MapView(ObservableList<String> addresses) {
-		this.addresses = addresses;
-		addressesList.setItems(addresses);
-		distances = DistanceMatrixHTTPGetter.getDistanceMatrix(addresses);
 		this.setTitle("A map view");
 		this.setResizable(true);
+		this.addresses = addresses;
+		this.addressesList.setItems(addresses);
 		this.setScene(new Scene(content()));
 		this.sizeToScene();
 	}
 
 	private BorderPane content() {
 		//center
-		for (int i = 0; i < addresses.size(); i++) {
-			center.add(new Text(addresses.get(i)), i + 1, 0);
-			center.add(new Text(addresses.get(i)), 0, i + 1);
-			for (int j = 0; j < addresses.size(); j++) {
-				center.add(new Text(distances[i][j] + "km"), j + 1, i + 1);
-			}
-		}
 		bordP.setCenter(center);
 
 		//top
@@ -100,6 +97,21 @@ class MapView extends Stage {
 
 		//end of content generation
 		return bordP;
+	}
+
+	public void setDistances(double[][] distances) {
+		this.distances = distances;
+	}
+
+	public void setData() {
+		//center
+		for (int i = 0; i < addresses.size(); i++) {
+			center.add(new Text(addresses.get(i)), i + 1, 0);
+			center.add(new Text(addresses.get(i)), 0, i + 1);
+			for (int j = 0; j < addresses.size(); j++) {
+				center.add(new Text(distances[i][j] + "km"), j + 1, i + 1);
+			}
+		}
 	}
 }
 
