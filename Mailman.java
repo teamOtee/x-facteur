@@ -1,15 +1,16 @@
-public class Mailman {
+import java.util.ArrayList;
 
-	private Booleen driver;
+public class Mailman {
+	private boolean driver;
 	private String lastName;
 	private String name;
-	private ArrayList <Shipments> path;
+	private ArrayList<Shipment> path;
 
-	public Mailman(Booleen d, String l, String n){
-		this.driver=d;
-		this.lastName=l;
-		this.name=n;
-		path=new ArrayList <Shipment> (100);
+	public Mailman(boolean d, String l, String n){
+		this.driver = d;
+		this.lastName = l;
+		this.name = n;
+		this.path = new ArrayList<Shipment>(100);
 	}
 
 	public void add(Shipment s){
@@ -17,9 +18,11 @@ public class Mailman {
 	}
 
 	public String toString(){
-		String aff=lastName+" "+name+" ";
-		if driver{
-			return aff+"Permis";
-		}else{return aff;}
+		String aff=lastName+" "+name;
+		if (driver) {
+			return aff+" (permis)";
+		}else{
+			return aff;
+		}
 	}
 }

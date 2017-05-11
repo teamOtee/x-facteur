@@ -1,5 +1,4 @@
 public abstract class Shipment{
-
 	private String address;
 	private String type;
 
