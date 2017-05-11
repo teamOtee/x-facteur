@@ -47,7 +47,6 @@ class MapView extends Stage {
 		this.setResizable(true);
 		this.setScene(new Scene(content()));
 		this.sizeToScene();
-
 	}
 
 	private BorderPane content() {
