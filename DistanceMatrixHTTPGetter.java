@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import org.json.JSONObject;
 
 public class DistanceMatrixHTTPGetter {
-	public static double[][] getDistanceMatrix(List<String> places) {
-		String origins = String.join("|", places).replace(" ", "+");
+	public static double[][] getDistanceMatrix(List<String> addresses) {
+		String origins = String.join("|", addresses).replace(" ", "+");
 		String destinations = origins;
 
 		//config constants
@@ -49,12 +49,12 @@ public class DistanceMatrixHTTPGetter {
 		}
 
 		//displaying response on stdout
-		double[][] distances = new double[places.size()][places.size()];
+		double[][] distances = new double[addresses.size()][addresses.size()];
 		try (Scanner resScan = new Scanner(response)) {
 			String responseBody = resScan.useDelimiter("\\A").next();
 			JSONObject obj = new JSONObject(responseBody);
-			for (int i = 0; i < places.size(); i++) {
-				for (int j = 0; j < places.size(); j++) {
+			for (int i = 0; i < addresses.size(); i++) {
+				for (int j = 0; j < addresses.size(); j++) {
 					distances[i][j] = new Double(obj.query("/rows/" + i + "/elements/" + j + "/distance/value").toString()).doubleValue() * 1e-3;
 				}
 			}
@@ -69,18 +69,18 @@ public class DistanceMatrixHTTPGetter {
 		//get origins and dest from user input
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Donnez une liste de lieux :");
-		List<String> places = new ArrayList<String>();
+		List<String> addresses = new ArrayList<String>();
 		String place = "";
 		while (!(place = sc.nextLine()).isEmpty()) {
-			places.add(place);
+			addresses.add(place);
 		}
 
 		System.out.println("Listes des distances");
 		System.out.println("====================");
-		double[][] distances = getDistanceMatrix(places);
-		for (int i = 0; i < places.size(); i++) {
-			for (int j = 0; j < places.size(); j++) {
-				System.out.println(places.get(i) + " --> " + places.get(j) + ": " + distances[i][j] + " km");
+		double[][] distances = getDistanceMatrix(addresses);
+		for (int i = 0; i < addresses.size(); i++) {
+			for (int j = 0; j < addresses.size(); j++) {
+				System.out.println(addresses.get(i) + " --> " + addresses.get(j) + ": " + distances[i][j] + " km");
 			}
 		}
 	}
