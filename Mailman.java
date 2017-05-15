@@ -25,4 +25,8 @@ public class Mailman {
 			return aff;
 		}
 	}
+
+	public boolean isDriver() {
+		return driver;
+	}
 }

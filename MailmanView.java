@@ -12,7 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -44,8 +43,8 @@ public class MailmanView extends Group {
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setPadding(new Insets(25, 25, 25, 25));
-		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-		scenesubtitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 14));
+		scenetitle.setFont(Font.font("sans-serif", 20));
+		scenesubtitle.setFont(Font.font("sans-serif", 14));
 		grid.add(scenetitle, 0, 0, 2, 1);
 		grid.add(scenesubtitle, 0, 1, 2, 1);
 		grid.add(lastname, 0, 2);
