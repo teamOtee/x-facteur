@@ -15,8 +15,7 @@ public class HomePage extends Stage {
 
 	public HomePage() {
 		//Paramètres Page d'accueil
-		this.getIcons().add(new Image(
-				"http://www.reponse-conso.fr/system/application/views/images/visuels/article/logo-de-la-poste-7768_294x294.png"));
+		this.getIcons().add(new Image("media/logo.png"));
 		this.setMaximized(true);
 		this.setScene(new Scene(content()));
 		this.setTitle("X Facteur");
