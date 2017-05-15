@@ -1,14 +1,17 @@
-public abstract class Shipment{
+public class Shipment {
 	private String address;
 	private String type;
 
-	public Shipment(String a,String t){
-		this.address=a;
-		this.type=t;
+	public Shipment(String address, String type){
+		this.address = address;
+		this.type = type;
+		if (! (type.equals("driving") || type.equals("walking"))) {
+			type = "driving";
+		}
 	}
 
 	public String toString(){
-		return this.type +" "+this.address;
+		return this.type + " " + this.address;
 	}
 
 	public String getAddress(){

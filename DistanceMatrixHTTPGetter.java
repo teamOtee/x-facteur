@@ -9,8 +9,13 @@ import java.util.ArrayList;
 import org.json.JSONObject;
 
 public class DistanceMatrixHTTPGetter {
-	public static double[][] getDistanceMatrix(List<String> addresses) {
-		String origins = String.join("|", addresses).replace(" ", "+");
+	public static double[][] getDistanceMatrix(List<Shipment> shipments) {
+		int nbShipments = shipments.size();
+		String origins = "";
+		for (Shipment s: shipments) {
+			origins += "|" + s.getAddress().replace(" ", "+");
+		}
+		origins = origins.substring(0, origins.length() - 1);
 		String destinations = origins;
 
 		//config constants
@@ -49,12 +54,12 @@ public class DistanceMatrixHTTPGetter {
 		}
 
 		//displaying response on stdout
-		double[][] distances = new double[addresses.size()][addresses.size()];
+		double[][] distances = new double[nbShipments][nbShipments];
 		try (Scanner resScan = new Scanner(response)) {
 			String responseBody = resScan.useDelimiter("\\A").next();
 			JSONObject obj = new JSONObject(responseBody);
-			for (int i = 0; i < addresses.size(); i++) {
-				for (int j = 0; j < addresses.size(); j++) {
+			for (int i = 0; i < nbShipments; i++) {
+				for (int j = 0; j < nbShipments; j++) {
 					distances[i][j] = new Double(obj.query("/rows/" + i + "/elements/" + j + "/distance/value").toString()).doubleValue() * 1e-3;
 				}
 			}
@@ -69,18 +74,18 @@ public class DistanceMatrixHTTPGetter {
 		//get origins and dest from user input
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Donnez une liste de lieux :");
-		List<String> addresses = new ArrayList<String>();
+		List<Shipment> shipments = new ArrayList<Shipment>();
 		String place = "";
 		while (!(place = sc.nextLine()).isEmpty()) {
-			addresses.add(place);
+			shipments.add(new Shipment(place, "driving"));
 		}
 
 		System.out.println("Listes des distances");
 		System.out.println("====================");
-		double[][] distances = getDistanceMatrix(addresses);
-		for (int i = 0; i < addresses.size(); i++) {
-			for (int j = 0; j < addresses.size(); j++) {
-				System.out.println(addresses.get(i) + " --> " + addresses.get(j) + ": " + distances[i][j] + " km");
+		double[][] distances = getDistanceMatrix(shipments);
+		for (int i = 0; i < shipments.size(); i++) {
+			for (int j = 0; j < shipments.size(); j++) {
+				System.out.println(shipments.get(i).getAddress() + " --> " + shipments.get(j).getAddress() + ": " + distances[i][j] + " km");
 			}
 		}
 	}
