@@ -1,25 +1,35 @@
 public class Shipment {
 	private String address;
-	private String type;
+	private Boolean driving;
 
-	public Shipment(String address, String type){
+	public Shipment(String address, Boolean driving){
 		this.address = address;
-		this.type = type;
-		if (! (type.equals("driving") || type.equals("walking"))) {
-			type = "driving";
-		}
+		this.driving = driving;
 	}
 
 	public String toString(){
-		return this.type + " " + this.address;
+		if driving{
+			return  "driving " + this.address;
+		}else{
+			return "walking "+ this.address;
+		}
 	}
 
 	public String getAddress(){
 		return this.address;
 	}
 
-    public String getType(){
-		return this.type;
+    public Boolean getDriver(){
+		return this.driver;
+	}
+	
+	public String getCity(){
+	}
+	
+	public String getStreet(){
+	}
+	
+	public String getNumber(){
 	}
 }
 
