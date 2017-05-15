@@ -2,7 +2,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.Tab;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -10,7 +11,7 @@ import javafx.scene.text.Text;
 
 public class HomePage extends Stage {
 	private BorderPane bordP = new BorderPane();
-	private VBox right = new VBox(8);
+	private TabPane right = new TabPane();
 	private Text top = new Text("X Facteur");
 
 	public HomePage() {
@@ -28,8 +29,19 @@ public class HomePage extends Stage {
 		top.setFont(Font.font("sans-serif", 20));
 		bordP.setTop(top);
 
-		//right: MailmanView & AddressesView
-		right.getChildren().addAll(new MailmanView(), new Rectangle(200, 200, Color.BLUE));
+		//right: MailmanView & ShipmentView
+		//right.setClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+
+		Tab mailmanTab = new Tab();
+		mailmanTab.setText("Facteurs");
+		mailmanTab.setContent(new MailmanView());
+		right.getTabs().add(mailmanTab);
+
+		Tab shipmentTab = new Tab();
+		shipmentTab.setText("Envois");
+		shipmentTab.setContent(new Rectangle(242, 242, Color.PURPLE));
+		right.getTabs().add(shipmentTab);
+
 		bordP.setRight(right);
 		bordP.setCenter(new Rectangle(400, 400, Color.RED));
 		return bordP;
