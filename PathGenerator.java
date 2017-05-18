@@ -1,3 +1,5 @@
+package XFacteur;
+
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -9,10 +11,10 @@ public class PathGenerator {
 		ArrayList<Shipment> walkingShipments = new ArrayList<Shipment>();
 
 		for (Shipment shipment: shipments) {
-			if (shipment.getType().equals("regular")) {
-				walkingShipments.add(shipment);
-			} else {
+			if (shipment.isDriving()) {
 				drivingShipments.add(shipment);
+			} else {
+				walkingShipments.add(shipment);
 			}
 		}
 		

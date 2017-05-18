@@ -1,3 +1,5 @@
+package XFacteur;
+
 import java.net.URLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -77,7 +79,7 @@ public class DistanceMatrixHTTPGetter {
 		List<Shipment> shipments = new ArrayList<Shipment>();
 		String place = "";
 		while (!(place = sc.nextLine()).isEmpty()) {
-			shipments.add(new Shipment(place, "driving"));
+			shipments.add(new Shipment(place, true));
 		}
 
 		System.out.println("Listes des distances");

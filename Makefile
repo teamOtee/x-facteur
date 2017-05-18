@@ -1,9 +1,5 @@
 all:
-	javac -cp '.:json.jar' *.java
-
-clean:
-	rm *.class
-
+	javac -d './bin' -cp '.:./json.jar' *.java
 run:
-	java -cp '.:json.jar' XFacteur
+	java -cp './bin:./json.jar' XFacteur.XFacteur
 

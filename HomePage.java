@@ -1,3 +1,5 @@
+package XFacteur;
+
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
@@ -16,7 +18,7 @@ public class HomePage extends Stage {
 
 	public HomePage() {
 		//Paramètres Page d'accueil
-		this.getIcons().add(new Image("media/logo.png"));
+		this.getIcons().add(new Image("file:media/logo.png"));
 		this.setMaximized(true);
 		this.setScene(new Scene(content()));
 		this.setTitle("X Facteur");

@@ -1,3 +1,5 @@
+package XFacteur;
+
 import javafx.collections.FXCollections;
 import javafx.scene.layout.GridPane;
 import javafx.collections.ObservableList;

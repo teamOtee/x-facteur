@@ -1,3 +1,5 @@
+package XFacteur;
+
 public class Shipment {
 	private String address;
 	private Boolean driving;
@@ -8,7 +10,7 @@ public class Shipment {
 	}
 
 	public String toString(){
-		if driving{
+		if (driving) {
 			return  "driving " + this.address;
 		}else{
 			return "walking "+ this.address;
@@ -19,17 +21,17 @@ public class Shipment {
 		return this.address;
 	}
 
-    public Boolean getDriver(){
-		return this.driver;
+    public Boolean isDriving(){
+		return this.driving;
 	}
 	
-	public String getCity(){
+	/*public String getCity(){
 	}
 	
 	public String getStreet(){
 	}
 	
 	public String getNumber(){
-	}
+	}*/
 }
 
