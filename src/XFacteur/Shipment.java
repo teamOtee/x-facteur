@@ -2,26 +2,22 @@ package XFacteur;
 
 public class Shipment {
 	private String address;
-	private Boolean driving;
+	private boolean driving;
 
-	public Shipment(String address, Boolean driving){
+	public Shipment(String address, boolean driving){
 		this.address = address;
 		this.driving = driving;
 	}
 
 	public String toString(){
-		if (driving) {
-			return  "driving " + this.address;
-		}else{
-			return "walking "+ this.address;
-		}
+		return (isDriving() ? "(en voiture)" : "(à pied)") + " " + address;
 	}
 
 	public String getAddress(){
 		return this.address;
 	}
 
-    public Boolean isDriving(){
+    public boolean isDriving(){
 		return this.driving;
 	}
 	

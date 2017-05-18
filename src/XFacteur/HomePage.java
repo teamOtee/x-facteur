@@ -7,15 +7,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.control.Tab;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.Menu;
 
 public class HomePage extends Stage {
-	private BorderPane bordP = new BorderPane();
-	private TabPane right = new TabPane();
-	private Text top = new Text("X Facteur");
+	protected BorderPane bordP = new BorderPane();
+	protected MenuBar top = new MenuBar();
+	protected TabPane right = new TabPane();
 
 	public HomePage() {
 		//Paramètres Page d'accueil
@@ -25,11 +23,11 @@ public class HomePage extends Stage {
 		this.setTitle("X Facteur");
 	}
 
-	private BorderPane content() {
+	protected BorderPane content() {
 		bordP = new BorderPane();
 
-		//top: title
-		top.setFont(Font.font("sans-serif", 20));
+		//top: MenuBar
+		top.getMenus().addAll(new Menu("Fichier"), new Menu("Aide"));
 		bordP.setTop(top);
 
 		//right: MailmanView & ShipmentView
@@ -42,11 +40,13 @@ public class HomePage extends Stage {
 
 		Tab shipmentTab = new Tab();
 		shipmentTab.setText("Envois");
-		shipmentTab.setContent(new Rectangle(242, 242, Color.PURPLE));
+		shipmentTab.setContent(new ShipmentView());
 		right.getTabs().add(shipmentTab);
 
 		bordP.setRight(right);
-		bordP.setCenter(new Rectangle(400, 400, Color.RED));
+
+		//center: MapView
+		bordP.setCenter(new MapView());
 		return bordP;
 	}
 }
