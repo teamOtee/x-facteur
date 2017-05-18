@@ -1,8 +1,9 @@
+bin
 *.class
 *.aux
 *.log
 *.out
 *.toc
 *.swp
-bin
-
+.classpath
+.project
