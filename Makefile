@@ -1,5 +1,5 @@
 all:
-	javac -d './bin' -cp '.:./json.jar' `find src -name *.java`
+	javac -d './bin' -cp './lib/json.jar' `find './src' -name *.java`
 run:
-	java -cp './bin:./json.jar' XFacteur.XFacteur
+	java -cp './bin:./lib/json.jar' XFacteur.XFacteur
 
