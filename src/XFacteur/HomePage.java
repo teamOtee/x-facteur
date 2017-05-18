@@ -5,6 +5,7 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.control.Tab;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
@@ -32,7 +33,7 @@ public class HomePage extends Stage {
 		bordP.setTop(top);
 
 		//right: MailmanView & ShipmentView
-		//right.setClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+		right.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
 		Tab mailmanTab = new Tab();
 		mailmanTab.setText("Facteurs");
