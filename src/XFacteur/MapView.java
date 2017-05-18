@@ -3,12 +3,14 @@ package XFacteur;
 import javafx.scene.Group;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
+import javafx.scene.web.WebView;
 
 public class MapView extends Group {
-	protected Rectangle rect = new Rectangle(420, 420, Color.CYAN);
+	protected WebView wView = new WebView();
 
 	public MapView() {
-		this.getChildren().addAll(rect);
+		this.getChildren().add(wView);
+		wView.getEngine().load("https://github.com/ribacq");
 	}
 }
 
