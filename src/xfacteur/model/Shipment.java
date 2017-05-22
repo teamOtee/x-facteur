@@ -1,4 +1,4 @@
-package XFacteur;
+package xfacteur.model;
 
 public class Shipment {
 	private String address;
@@ -20,14 +20,5 @@ public class Shipment {
     public boolean isDriving(){
 		return this.driving;
 	}
-	
-	/*public String getCity(){
-	}
-	
-	public String getStreet(){
-	}
-	
-	public String getNumber(){
-	}*/
 }
 

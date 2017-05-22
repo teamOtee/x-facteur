@@ -1,4 +1,4 @@
-package XFacteur;
+package xfacteur.view;
 
 import javafx.collections.FXCollections;
 import javafx.scene.layout.GridPane;
@@ -18,23 +18,25 @@ import javafx.scene.text.Text;
 import javafx.scene.Group;
 import javafx.stage.Stage;
 
-public class ShipmentView extends Group {
+import xfacteur.model.Mailman;
+
+public class MailmanView extends Group {
 	protected VBox view = new VBox(8);
 	protected GridPane grid = new GridPane();
-	protected ListView<Shipment> shipmentList = new ListView<Shipment>();
-	protected Label addressStreetL = new Label("N° et rue :");
-	protected Label addressCityL = new Label("Ville :");
-	protected TextField addressStreet = new TextField();
-	protected TextField addressCity = new TextField();
-	protected Label drivingL = new Label("En voiture :");
+	protected ListView<Mailman> mailmanList = new ListView<Mailman>();
+	protected Label lastnameL = new Label("Nom :");
+	protected Label nameL = new Label("Prénom :");
+	protected TextField lastname = new TextField();
+	protected TextField name = new TextField();
+	protected Label drivingL = new Label("Permis :");
 	protected CheckBox driving = new CheckBox();
-	protected Text formTitle = new Text("Ajouter un envoi");
+	protected Text formTitle = new Text("Ajouter un facteur");
 	protected Button addBtn = new Button("Ajouter");
 	
-	public ShipmentView() {
-		Shipment s1 = new Shipment("IUT de Lannion", true);
-		Shipment s2 = new Shipment("Mairie de Lannion", false);
-		shipmentList.setItems(FXCollections.observableArrayList(s1, s2));
+	public MailmanView() {
+		Mailman m1 = new Mailman(true,"Garcia","José");
+		Mailman m2 = new Mailman(false,"Gonzalo","Michalon");
+		mailmanList.setItems(FXCollections.observableArrayList(m1, m2));
 
 		//form grid
 		grid.setAlignment(Pos.CENTER);
@@ -43,16 +45,16 @@ public class ShipmentView extends Group {
 		grid.setPadding(new Insets(25, 25, 25, 25));
 		formTitle.setFont(Font.font("sans-serif", 14));
 		grid.add(formTitle, 0, 1, 2, 1);
-		grid.add(addressStreetL, 0, 2);
-		grid.add(addressStreet, 1, 2);
-		grid.add(addressCityL, 0, 3);
-		grid.add(addressCity, 1, 3);
+		grid.add(lastnameL, 0, 2);
+		grid.add(lastname, 1, 2);
+		grid.add(nameL, 0, 3);
+		grid.add(name, 1, 3);
 		grid.add(drivingL, 0, 4);
 		grid.add(driving, 1, 4);
 		grid.add(addBtn, 0, 5);
 
 		//form + list in a vbox
-		view.getChildren().addAll(grid, shipmentList);
+		view.getChildren().addAll(grid, mailmanList);
 		this.getChildren().add(view);
 	}
 }

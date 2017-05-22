@@ -1,4 +1,4 @@
-package XFacteur;
+package xfacteur.model;
 
 import java.util.ArrayList;
 
@@ -32,3 +32,4 @@ public class Mailman {
 		return driver;
 	}
 }
+

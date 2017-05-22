@@ -1,4 +1,4 @@
-package XFacteur;
+package xfacteur.model;
 
 import java.net.URLConnection;
 import java.net.URL;

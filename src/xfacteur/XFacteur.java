@@ -1,4 +1,4 @@
-package XFacteur;
+package xfacteur;
 
 import javafx.application.Application;
 import javafx.stage.Stage;

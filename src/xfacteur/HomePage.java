@@ -1,4 +1,4 @@
-package XFacteur;
+package xfacteur;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -10,6 +10,10 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+
+import xfacteur.view.ShipmentView;
+import xfacteur.view.MailmanView;
+import xfacteur.view.MapView;
 
 public class HomePage extends Stage {
 	protected BorderPane bordP = new BorderPane();

@@ -1,4 +1,4 @@
-package XFacteur;
+package xfacteur.view;
 
 import javafx.scene.Group;
 import javafx.scene.layout.GridPane;

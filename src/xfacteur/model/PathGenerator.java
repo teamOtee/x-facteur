@@ -1,4 +1,4 @@
-package XFacteur;
+package xfacteur.model;
 
 import java.util.HashMap;
 import java.util.ArrayList;
