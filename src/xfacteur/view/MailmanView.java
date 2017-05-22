@@ -2,7 +2,6 @@ package xfacteur.view;
 
 import javafx.collections.FXCollections;
 import javafx.scene.layout.GridPane;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -10,13 +9,10 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.Group;
-import javafx.stage.Stage;
 
 import xfacteur.model.Mailman;
 
