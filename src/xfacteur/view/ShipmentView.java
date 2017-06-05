@@ -1,6 +1,6 @@
 package xfacteur.view;
 
-import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.layout.GridPane;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -15,6 +15,7 @@ import javafx.scene.text.Text;
 import javafx.scene.Group;
 
 import xfacteur.model.Shipment;
+import xfacteur.ShipmentController;
 
 public class ShipmentView extends Group {
 	protected VBox view = new VBox(8);
@@ -29,11 +30,13 @@ public class ShipmentView extends Group {
 	protected Text formTitle = new Text("Ajouter un envoi");
 	protected Button addBtn = new Button("Ajouter");
 	
-	public ShipmentView() {
-		Shipment s1 = new Shipment("IUT de Lannion", true);
-		Shipment s2 = new Shipment("Mairie de Lannion", false);
-		shipmentList.setItems(FXCollections.observableArrayList(s1, s2));
+	public ShipmentView(ObservableList<Shipment> items) {
+		shipmentList.setItems(items);
+		makeLayout();
+		makeInteractivity();
+	}
 
+	protected void makeLayout() {
 		//form grid
 		grid.setAlignment(Pos.CENTER);
 		grid.setHgap(10);
@@ -52,6 +55,35 @@ public class ShipmentView extends Group {
 		//form + list in a vbox
 		view.getChildren().addAll(grid, shipmentList);
 		this.getChildren().add(view);
+	}
+
+	protected void makeInteractivity() {
+		//add button
+		addBtn.setDisable(true);
+		addressStreet.setOnKeyReleased(e -> {
+			addBtn.setDisable(addressStreet.getText().isEmpty() || addressCity.getText().isEmpty());
+		});
+		addressCity.setOnKeyReleased(e -> {
+			addBtn.setDisable(addressStreet.getText().isEmpty() || addressCity.getText().isEmpty());
+		});
+		addBtn.setOnAction(e -> {
+			ShipmentController.addItem(new Shipment(addressStreet.getText(), addressCity.getText(), driving.isSelected()));
+			clearForm();
+		});
+
+		//when an item is selected
+		shipmentList.setEditable(true);
+		shipmentList.setOnEditStart(e -> {
+			addBtn.setText("Enregistrer");
+			addBtn.setDisable(false);
+			addressStreet.setText(ShipmentController.getItem(e.getIndex()).getStreet());
+			addressCity.setText(ShipmentController.getItem(e.getIndex()).getCity());
+		});
+	}
+
+	protected void clearForm() {
+		addressStreet.clear();
+		addressCity.clear();
 	}
 }
 
