@@ -44,28 +44,36 @@ public class ShipmentController {
 	}
 
 	public static void removeItem(Shipment s) {
-		items.remove(s);
+		if (deletionConfirmation()) {
+			items.remove(s);
+		}
 	}
 
 	public static void removeItem(int i) {
-		items.remove(i);
+		removeItem(getItem(i));
 	}
 
 	//window opening methods
-	public static Shipment openAddModal() {
+	public static void openAddModal() {
 		editModal.initValue(null);
 		editModal.showAndWait();
-		return editModal.getValue();
+		Shipment inputS = editModal.getValue();
+		if (inputS != null) {
+			addItem(inputS);
+		}
 	}
 
-	public static Shipment openEditModal(Shipment s) {
+	public static void openEditModal(Shipment s) {
 		editModal.initValue(s);
 		editModal.showAndWait();
-		return editModal.getValue();
+		Shipment inputS = editModal.getValue();
+		if (inputS != null) {
+			setItem(items.indexOf(s), inputS);
+		}
 	}
 
-	public static Shipment openEditModal(int i) {
-		return openEditModal(getItem(i));
+	public static void openEditModal(int i) {
+		openEditModal(getItem(i));
 	}
 
 	public static boolean deletionConfirmation() {

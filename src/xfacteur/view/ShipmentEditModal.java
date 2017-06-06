@@ -8,11 +8,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.text.Text;
+import javafx.geometry.HPos;
 
 import xfacteur.model.Shipment;
 
 public class ShipmentEditModal extends Stage {
 	protected GridPane gridP = new GridPane();
+	protected Text header = new Text("Veuillez remplir tous les champs :");
 	protected Label addressStreetL = new Label("N° et rue :");
 	protected Label addressCityL = new Label("Ville :");
 	protected TextField addressStreet = new TextField();
@@ -33,14 +36,17 @@ public class ShipmentEditModal extends Stage {
 	protected GridPane content() {
 		gridP.setHgap(8);
 		gridP.setVgap(4);
-		gridP.add(addressStreetL, 0, 0);
-		gridP.add(addressStreet, 1, 0);
-		gridP.add(addressCityL, 0, 1);
-		gridP.add(addressCity, 1, 1);
-		gridP.add(drivingL, 0, 2);
-		gridP.add(driving, 1, 2);
-		gridP.add(okBtn, 0, 3);
-		gridP.add(cancelBtn, 1, 3);
+		gridP.add(header, 0, 0, 3, 1);
+		gridP.add(addressStreetL, 0, 1);
+		gridP.add(addressStreet, 1, 1, 2, 1);
+		gridP.add(addressCityL, 0, 2);
+		gridP.add(addressCity, 1, 2, 2, 1);
+		gridP.add(drivingL, 0, 3);
+		gridP.add(driving, 1, 3);
+		GridPane.setHalignment(okBtn, HPos.RIGHT);
+		GridPane.setHalignment(cancelBtn, HPos.RIGHT);
+		gridP.add(okBtn, 1, 4);
+		gridP.add(cancelBtn, 2, 4);
 
 		return gridP;
 	}
