@@ -14,9 +14,9 @@ public class MapView extends Group {
 		grid.setHgap(4);
 		grid.setVgap(8);
 		genBtn.setOnAction(e -> {
-			wView.getEngine().load("http://en.wikipedia.org/wiki/random");
+			wView.getEngine().load("https://www.google.fr/maps");
 		});
-		wView.getEngine().load("http://lipsum.org");
+		wView.getEngine().load("https://www.google.fr/maps");
 		grid.add(wView, 0, 1);
 		grid.add(genBtn, 0, 0);
 		this.getChildren().add(grid);

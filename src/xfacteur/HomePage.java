@@ -5,7 +5,6 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.control.Tab;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.Menu;
@@ -48,6 +47,8 @@ public class HomePage extends Stage {
 
 		//right: MailmanView & ShipmentView
 		tabs.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+		tabs.setTabMinWidth(120);
+		
 
 		Tab mailmanTab = new Tab("Facteurs", mailmanView);
 		Tab shipmentTab = new Tab("Envois", shipmentView);
