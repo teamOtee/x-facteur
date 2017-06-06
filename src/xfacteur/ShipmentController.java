@@ -2,6 +2,9 @@ package xfacteur;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import java.util.Optional;
 
 import xfacteur.model.Shipment;
 import xfacteur.view.ShipmentView;
@@ -23,7 +26,7 @@ public class ShipmentController {
 	protected static ShipmentView view = new ShipmentView(items);
 	protected static ShipmentEditModal editModal = new ShipmentEditModal();
 
-	//methods
+	//simple getters and setters
 	public static ObservableList<Shipment> getItems() { return items; }
 	public static Shipment getItem(int i) { return items.get(i); }
 	public static ShipmentView getView() { return view; }
@@ -44,6 +47,11 @@ public class ShipmentController {
 		items.remove(s);
 	}
 
+	public static void removeItem(int i) {
+		items.remove(i);
+	}
+
+	//window opening methods
 	public static Shipment openAddModal() {
 		editModal.initValue(null);
 		editModal.showAndWait();
@@ -54,6 +62,16 @@ public class ShipmentController {
 		editModal.initValue(s);
 		editModal.showAndWait();
 		return editModal.getValue();
+	}
+
+	public static Shipment openEditModal(int i) {
+		return openEditModal(getItem(i));
+	}
+
+	public static boolean deletionConfirmation() {
+		Alert confirmModal = new Alert(Alert.AlertType.WARNING, "Êtes-vous sûr de vouloir supprimer cet envoi ?", ButtonType.OK, ButtonType.CANCEL);
+		Optional<ButtonType> result = confirmModal.showAndWait();
+		return result.isPresent() && result.get() == ButtonType.OK;
 	}
 }
 

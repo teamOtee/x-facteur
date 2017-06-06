@@ -37,11 +37,11 @@ public class ShipmentView extends Group {
 		grid.setAlignment(Pos.CENTER_LEFT);
 		grid.setHgap(4);
 		grid.setVgap(8);
-		grid.setPadding(new Insets(20, 20, 20, 20));
+		grid.setPadding(new Insets(20));
 		listHeader.setFont(Font.font("sans-serif", 14));
 		grid.add(addBtn, 0, 0);
-		grid.add(editBtn, 0, 1);
-		grid.add(delBtn, 0, 2);
+		grid.add(editBtn, 1, 0);
+		grid.add(delBtn, 2, 0);
 
 		//form + list in a vbox
 		view.getChildren().addAll(grid, listHeader, shipmentList);
@@ -49,9 +49,28 @@ public class ShipmentView extends Group {
 	}
 
 	protected void makeInteractivity() {
+		//add button
 		addBtn.setOnAction(e -> {
 			ShipmentController.addItem(ShipmentController.openAddModal());
 			listHeader.setText(shipmentList.getItems().size() + " envois");
+		});
+
+		//edit button
+		editBtn.setDisable(true);
+		shipmentList.getSelectionModel().selectedItemProperty().addListener(e -> {
+			editBtn.setDisable(shipmentList.getSelectionModel().isEmpty());
+		});
+		editBtn.setOnAction(e -> {
+			int selectedIndex = shipmentList.getSelectionModel().getSelectedIndices().get(0);
+			ShipmentController.setItem(selectedIndex, ShipmentController.openEditModal(selectedIndex));
+		});
+
+		//delete button
+		delBtn.setOnAction(e -> {
+			int selectedIndex = shipmentList.getSelectionModel().getSelectedIndices().get(0);
+			if (ShipmentController.deletionConfirmation()) {
+				ShipmentController.removeItem(selectedIndex);
+			}
 		});
 	}
 }
