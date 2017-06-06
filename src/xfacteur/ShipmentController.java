@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 
 import xfacteur.model.Shipment;
 import xfacteur.view.ShipmentView;
+import xfacteur.view.ShipmentEditModal;
 
 public class ShipmentController {
 	/*
@@ -20,6 +21,7 @@ public class ShipmentController {
 	//attributes
 	protected static ObservableList<Shipment> items = FXCollections.observableArrayList(new Shipment("IUT", "Lannion", true), new Shipment("Mairie", "Lannion", false));
 	protected static ShipmentView view = new ShipmentView(items);
+	protected static ShipmentEditModal editModal = new ShipmentEditModal();
 
 	//methods
 	public static ObservableList<Shipment> getItems() { return items; }
@@ -40,6 +42,18 @@ public class ShipmentController {
 
 	public static void removeItem(Shipment s) {
 		items.remove(s);
+	}
+
+	public static Shipment openAddModal() {
+		editModal.initValue(null);
+		editModal.showAndWait();
+		return editModal.getValue();
+	}
+
+	public static Shipment openEditModal(Shipment s) {
+		editModal.initValue(s);
+		editModal.showAndWait();
+		return editModal.getValue();
 	}
 }
 
