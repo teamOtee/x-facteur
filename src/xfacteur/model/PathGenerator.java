@@ -65,7 +65,7 @@ public class PathGenerator {
 		//an empty path for every mailman
 		Map<Mailman, Path> paths = new HashMap<Mailman, Path>();
 		for (Mailman m: mailmen) {
-			paths.put(m, new Path(m));
+			paths.put(m, new Path(m, shipments.get(0)));
 		}
 
 		//for every shipment, add it to the currently closest mailman
@@ -73,7 +73,7 @@ public class PathGenerator {
 			Mailman closest = mailmen.get(0);
 			double minDist = Double.MAX_VALUE;
 			for (Mailman m: mailmen) {
-				if ((paths.get(m).size() == 0) || (distances.getDistance(paths.get(m).getLastShipment(), s) < minDist)) {
+				if (distances.getDistance(paths.get(m).getLastShipment(), s) < minDist) {
 					closest = m;
 					minDist = distances.getDistance(paths.get(m).getLastShipment(), s);
 				}

@@ -23,7 +23,7 @@ public class MailmanController {
 
 	// attributes
 	protected static ObservableList<Mailman> items = FXCollections
-			.observableArrayList(new Mailman(true, "Arnaud", "Michel"), new Mailman(false, "Jean", "Marc"));
+		.observableArrayList(new Mailman(true, "STALLMAN", "Richard"), new Mailman(false, "GATES", "Bill"));
 	protected static MailmanView view = new MailmanView(items);
 	protected static MailmanEditModal editModal = new MailmanEditModal();
 

@@ -8,12 +8,15 @@ public class Path {
 	protected LinkedList<Shipment> shipments;
 	protected LinkedList<Double> distancesToNext;
 
-	public Path(Mailman mailman) {
+	public Path(Mailman mailman, Shipment startPoint) {
 		this.mailman = mailman;
 		this.shipments = new LinkedList<Shipment>();
+		shipments.add(startPoint);
 		this.distancesToNext = new LinkedList<Double>();
+		distancesToNext.add(0.0);
 	}
 
+	public Mailman getMailman() { return mailman; }
 	public LinkedList<Shipment> getShipments() { return shipments; }
 	public LinkedList<Double> getDistancesToNext() { return distancesToNext; }
 	public Shipment getShipment(int i) { return shipments.get(i); }
