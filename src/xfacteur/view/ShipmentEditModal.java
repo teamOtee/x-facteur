@@ -75,7 +75,8 @@ public class ShipmentEditModal extends Stage {
 			addressStreet.setText(s.getStreet());
 			addressCity.setText(s.getCity());
 			driving.setSelected(s.isDriving());
-			this.setTitle("Éditer un envoi — X Facteur");
+			this.setTitle("Editer un envoi — X Facteur");
+			okBtn.setDisable(false);
 		} else {
 			addressStreet.clear();
 			addressCity.clear();
