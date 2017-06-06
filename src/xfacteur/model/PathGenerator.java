@@ -11,7 +11,7 @@ public class PathGenerator {
 	protected PathGenerator() {}
 	
 	//the access point here
-	public static Map<Mailman, LinkedList<Shipment>> genPaths(List<Mailman> mailmen, List<Shipment> shipments) {
+	public static Map<Mailman, Path> genPaths(List<Mailman> mailmen, List<Shipment> shipments) {
 		//sort Shipment ArrayList
 		List<Shipment> drivingShipments = new ArrayList<Shipment>();
 		List<Shipment> walkingShipments = new ArrayList<Shipment>();
@@ -40,8 +40,8 @@ public class PathGenerator {
 		}
 
 		//paths are stored per mailman
-		Map<Mailman, LinkedList<Shipment>> drivingPaths = null;
-		Map<Mailman, LinkedList<Shipment>> walkingPaths = null;
+		Map<Mailman, Path> drivingPaths = null;
+		Map<Mailman, Path> walkingPaths = null;
 
 		//generate paths for driving mailmen
 		if ((drivingShipments.size() > 0) && (drivingMailmen.size() > 0)) {
@@ -54,18 +54,18 @@ public class PathGenerator {
 		}
 
 		//return result
-		Map<Mailman, LinkedList<Shipment>> paths = new HashMap<Mailman, LinkedList<Shipment>>();
+		Map<Mailman, Path> paths = new HashMap<Mailman, Path>();
 		paths.putAll(drivingPaths);
 		paths.putAll(walkingPaths);
 		return paths;
 	}
 
 	//basic paths: a simple loop for every mailman
-	protected static Map<Mailman, LinkedList<Shipment>> initBasicPaths(List<Mailman> mailmen, List<Shipment> shipments, DistanceMatrix distances) {
+	protected static Map<Mailman, Path> initBasicPaths(List<Mailman> mailmen, List<Shipment> shipments, DistanceMatrix distances) {
 		//an empty path for every mailman
-		Map<Mailman, LinkedList<Shipment>> paths = new HashMap<Mailman, LinkedList<Shipment>>();
+		Map<Mailman, Path> paths = new HashMap<Mailman, Path>();
 		for (Mailman m: mailmen) {
-			paths.put(m, new LinkedList<Shipment>());
+			paths.put(m, new Path(m));
 		}
 
 		//for every shipment, add it to the currently closest mailman
@@ -73,12 +73,12 @@ public class PathGenerator {
 			Mailman closest = mailmen.get(0);
 			double minDist = Double.MAX_VALUE;
 			for (Mailman m: mailmen) {
-				if ((paths.get(m).size() == 0) || (distances.get(paths.get(m).getLast(), s) < minDist)) {
+				if ((paths.get(m).size() == 0) || (distances.getDistance(paths.get(m).getLastShipment(), s) < minDist)) {
 					closest = m;
-					minDist = distances.get(paths.get(m).getLast(), s);
+					minDist = distances.getDistance(paths.get(m).getLastShipment(), s);
 				}
 			}
-			paths.get(closest).add(s);
+			paths.get(closest).add(s, distances);
 		}
 
 		return paths;

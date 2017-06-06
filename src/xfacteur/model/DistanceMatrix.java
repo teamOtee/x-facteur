@@ -11,7 +11,7 @@ public class DistanceMatrix {
 		this.values = values;
 	}
 
-	public double get(Shipment from, Shipment to) {
+	public double getDistance(Shipment from, Shipment to) {
 		if (shipments.contains(from) && shipments.contains(to)) {
 			return values[shipments.indexOf(from)][shipments.indexOf(to)];
 		} else {

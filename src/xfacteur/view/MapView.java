@@ -6,6 +6,8 @@ import javafx.scene.web.WebView;
 import javafx.scene.control.Button;
 import javafx.geometry.Insets;
 
+import xfacteur.PathController;
+
 public class MapView extends Group {
 	protected GridPane grid = new GridPane();
 	protected Button genBtn = new Button("Générer");
@@ -16,7 +18,8 @@ public class MapView extends Group {
 		grid.setVgap(8);
 		GridPane.setMargin(wView, new Insets(20));
 		genBtn.setOnAction(e -> {
-			wView.getEngine().load("https://www.google.fr/maps");
+			PathController.generate();
+			PathController.display();
 		});
 		wView.getEngine().load("https://www.google.fr/maps");
 		grid.add(wView, 0, 1);

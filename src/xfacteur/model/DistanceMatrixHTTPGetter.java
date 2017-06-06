@@ -87,7 +87,7 @@ public class DistanceMatrixHTTPGetter {
 		DistanceMatrix distances = getDistanceMatrix(shipments);
 		for (Shipment from: distances.getShipments()) {
 			for (Shipment to: distances.getShipments()) {
-				System.out.println(from.getAddress() + " --> " + to.getAddress() + ": " + distances.get(from, to) + " km");
+				System.out.println(from.getAddress() + " --> " + to.getAddress() + ": " + distances.getDistance(from, to) + " km");
 			}
 		}
 	}
