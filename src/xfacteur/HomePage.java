@@ -19,12 +19,12 @@ public class HomePage extends Stage {
 	protected BorderPane bordP = new BorderPane();
 	protected MenuBar menuBar = new MenuBar();
 	protected TabPane tabs = new TabPane();
-	protected MailmanView mailmanView = new MailmanView();
+	protected MailmanView mailmanView = MailmanController.getView();
 	protected ShipmentView shipmentView = ShipmentController.getView();
 	protected MapView mapView = new MapView();
 
 	public HomePage() {
-		//Paramètres Page d'accueil
+		// Paramètres Page d'accueil
 		this.getIcons().add(new Image("file:media/logo.png"));
 		this.setMaximized(true);
 		this.setScene(new Scene(content()));
@@ -34,7 +34,7 @@ public class HomePage extends Stage {
 	protected BorderPane content() {
 		bordP = new BorderPane();
 
-		//top: MenuBar
+		// top: MenuBar
 		Menu fileM = new Menu("Fichier");
 		MenuItem quitMI = new MenuItem("Quitter");
 		quitMI.setOnAction(e -> {
@@ -50,10 +50,9 @@ public class HomePage extends Stage {
 		menuBar.getMenus().addAll(fileM, helpM);
 		bordP.setTop(menuBar);
 
-		//right: MailmanView & ShipmentView
+		// right: MailmanView & ShipmentView
 		tabs.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 		tabs.setTabMinWidth(120);
-		
 
 		Tab mailmanTab = new Tab("Facteurs", mailmanView);
 		Tab shipmentTab = new Tab("Envois", shipmentView);
@@ -61,9 +60,8 @@ public class HomePage extends Stage {
 
 		bordP.setRight(tabs);
 
-		//center: MapView
+		// center: MapView
 		bordP.setCenter(mapView);
 		return bordP;
 	}
 }
-

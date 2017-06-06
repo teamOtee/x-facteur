@@ -12,24 +12,33 @@ import xfacteur.view.ShipmentEditModal;
 
 public class ShipmentController {
 	/*
-	 * A controller class for the shipments
-	 * Its goal is to manage model (data) and view for the shipments
-	 * and be the interface for everything concerning shipments for the main program.
-	 * Methods and attributes are static
+	 * A controller class for the shipments Its goal is to manage model (data)
+	 * and view for the shipments and be the interface for everything concerning
+	 * shipments for the main program. Methods and attributes are static
 	 */
 
-	//inaccessible constructor
-	protected ShipmentController() {}
+	// inaccessible constructor
+	protected ShipmentController() {
+	}
 
-	//attributes
-	protected static ObservableList<Shipment> items = FXCollections.observableArrayList(new Shipment("IUT", "Lannion", true), new Shipment("Mairie", "Lannion", false));
+	// attributes
+	protected static ObservableList<Shipment> items = FXCollections
+			.observableArrayList(new Shipment("IUT", "Lannion", true), new Shipment("Mairie", "Lannion", false));
 	protected static ShipmentView view = new ShipmentView(items);
 	protected static ShipmentEditModal editModal = new ShipmentEditModal();
 
-	//simple getters and setters
-	public static ObservableList<Shipment> getItems() { return items; }
-	public static Shipment getItem(int i) { return items.get(i); }
-	public static ShipmentView getView() { return view; }
+	// simple getters and setters
+	public static ObservableList<Shipment> getItems() {
+		return items;
+	}
+
+	public static Shipment getItem(int i) {
+		return items.get(i);
+	}
+
+	public static ShipmentView getView() {
+		return view;
+	}
 
 	public static void setItems(ObservableList<Shipment> items) {
 		ShipmentController.items = items;
@@ -53,7 +62,7 @@ public class ShipmentController {
 		removeItem(getItem(i));
 	}
 
-	//window opening methods
+	// window opening methods
 	public static void openAddModal() {
 		editModal.initValue(null);
 		editModal.showAndWait();
@@ -77,9 +86,9 @@ public class ShipmentController {
 	}
 
 	public static boolean deletionConfirmation() {
-		Alert confirmModal = new Alert(Alert.AlertType.WARNING, "Êtes-vous sûr de vouloir supprimer cet envoi ?", ButtonType.OK, ButtonType.CANCEL);
+		Alert confirmModal = new Alert(Alert.AlertType.WARNING, "Êtes-vous sûr de vouloir supprimer cet envoi ?",
+				ButtonType.OK, ButtonType.CANCEL);
 		Optional<ButtonType> result = confirmModal.showAndWait();
 		return result.isPresent() && result.get() == ButtonType.OK;
 	}
 }
-

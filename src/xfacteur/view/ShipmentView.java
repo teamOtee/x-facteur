@@ -1,21 +1,17 @@
 package xfacteur.view;
 
 import javafx.collections.ObservableList;
-import javafx.scene.layout.GridPane;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.scene.Group;
-
-import xfacteur.model.Shipment;
 import xfacteur.ShipmentController;
+import xfacteur.model.Shipment;
 
 public class ShipmentView extends Group {
 	protected VBox view = new VBox(8);
@@ -25,7 +21,7 @@ public class ShipmentView extends Group {
 	protected Button addBtn = new Button("Ajouter…");
 	protected Button editBtn = new Button("Éditer…");
 	protected Button delBtn = new Button("Supprimer");
-	
+
 	public ShipmentView(ObservableList<Shipment> items) {
 		shipmentList.setItems(items);
 		makeLayout();
@@ -34,7 +30,7 @@ public class ShipmentView extends Group {
 	}
 
 	protected void makeLayout() {
-		//form grid
+		// form grid
 		grid.setAlignment(Pos.CENTER_LEFT);
 		grid.setHgap(4);
 		grid.setVgap(8);
@@ -44,19 +40,19 @@ public class ShipmentView extends Group {
 		grid.add(editBtn, 1, 0);
 		grid.add(delBtn, 2, 0);
 
-		//form + list in a vbox
+		// form + list in a vbox
 		view.getChildren().addAll(grid, listHeader, shipmentList);
 		this.getChildren().add(view);
 	}
 
 	protected void makeInteractivity() {
-		//add button
+		// add button
 		addBtn.setOnAction(e -> {
 			ShipmentController.openAddModal();
 			updateListHeader();
 		});
 
-		//disable edit and delete buttons if selection is empty
+		// disable edit and delete buttons if selection is empty
 		editBtn.setDisable(true);
 		delBtn.setDisable(true);
 		shipmentList.getSelectionModel().selectedItemProperty().addListener(e -> {
@@ -64,14 +60,14 @@ public class ShipmentView extends Group {
 			delBtn.setDisable(shipmentList.getSelectionModel().isEmpty());
 		});
 
-		//edit button
+		// edit button
 		editBtn.setOnAction(e -> {
 			int selectedIndex = shipmentList.getSelectionModel().getSelectedIndices().get(0);
 			ShipmentController.openEditModal(selectedIndex);
 			updateListHeader();
 		});
 
-		//delete button
+		// delete button
 		delBtn.setOnAction(e -> {
 			int selectedIndex = shipmentList.getSelectionModel().getSelectedIndices().get(0);
 			ShipmentController.removeItem(selectedIndex);
@@ -80,7 +76,7 @@ public class ShipmentView extends Group {
 	}
 
 	protected void updateListHeader() {
-		listHeader.setText(shipmentList.getItems().size() + " envoi" + (shipmentList.getItems().size() != 1 ? "s" : ""));
+		listHeader
+				.setText(shipmentList.getItems().size() + " envoi" + (shipmentList.getItems().size() != 1 ? "s" : ""));
 	}
 }
-

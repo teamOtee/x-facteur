@@ -2,6 +2,7 @@ package xfacteur;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import xfacteur.view.AboutModal;
 
 public class XFacteur extends Application {
 	public void start(Stage primaryStage) {
