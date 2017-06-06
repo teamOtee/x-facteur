@@ -12,6 +12,9 @@ public class XFacteur extends Application {
 	public static void main(String[] args){
 		Application.launch(args);
 	}
-
+	
+	public static void showAbout() {
+		new AboutModal().showAndWait();
+	}
 }
 

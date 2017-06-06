@@ -42,6 +42,11 @@ public class HomePage extends Stage {
 		});
 		fileM.getItems().add(quitMI);
 		Menu helpM = new Menu("Aide");
+		MenuItem aboutMI = new MenuItem("À propos");
+		aboutMI.setOnAction(e -> {
+			XFacteur.showAbout();
+		});
+		helpM.getItems().add(aboutMI);
 		menuBar.getMenus().addAll(fileM, helpM);
 		bordP.setTop(menuBar);
 
