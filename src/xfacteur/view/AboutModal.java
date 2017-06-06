@@ -1,4 +1,4 @@
-package xfacteur;
+package xfacteur.view;
 
 import javafx.stage.Stage;
 import javafx.stage.Modality;
