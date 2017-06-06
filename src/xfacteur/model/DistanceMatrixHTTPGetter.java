@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import org.json.JSONObject;
 
 public class DistanceMatrixHTTPGetter {
-	public static double[][] getDistanceMatrix(List<Shipment> shipments) {
+	public static DistanceMatrix getDistanceMatrix(List<Shipment> shipments) {
 		int nbShipments = shipments.size();
 		String origins = "";
 		for (Shipment s: shipments) {
@@ -68,7 +68,7 @@ public class DistanceMatrixHTTPGetter {
 		} catch (Exception e) {
 			System.out.println("Erreur de lecture du contenu !");
 		} finally {
-			return distances;
+			return new DistanceMatrix(shipments, distances);
 		}
 	}
 
@@ -84,10 +84,10 @@ public class DistanceMatrixHTTPGetter {
 
 		System.out.println("Listes des distances");
 		System.out.println("====================");
-		double[][] distances = getDistanceMatrix(shipments);
-		for (int i = 0; i < shipments.size(); i++) {
-			for (int j = 0; j < shipments.size(); j++) {
-				System.out.println(shipments.get(i).getAddress() + " --> " + shipments.get(j).getAddress() + ": " + distances[i][j] + " km");
+		DistanceMatrix distances = getDistanceMatrix(shipments);
+		for (Shipment from: distances.getShipments()) {
+			for (Shipment to: distances.getShipments()) {
+				System.out.println(from.getAddress() + " --> " + to.getAddress() + ": " + distances.get(from, to) + " km");
 			}
 		}
 	}
