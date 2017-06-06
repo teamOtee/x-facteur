@@ -10,7 +10,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import xfacteur.ShipmentController;
+
+import xfacteur.MailmanController;
 import xfacteur.model.Mailman;
 
 public class MailmanView extends Group {
@@ -48,7 +49,7 @@ public class MailmanView extends Group {
 	protected void makeInteractivity() {
 		// add button
 		addBtn.setOnAction(e -> {
-			ShipmentController.openAddModal();
+			MailmanController.openAddModal();
 			updateListHeader();
 		});
 
@@ -63,14 +64,14 @@ public class MailmanView extends Group {
 		// edit button
 		editBtn.setOnAction(e -> {
 			int selectedIndex = mailmanList.getSelectionModel().getSelectedIndices().get(0);
-			ShipmentController.openEditModal(selectedIndex);
+			MailmanController.openEditModal(selectedIndex);
 			updateListHeader();
 		});
 
 		// delete button
 		delBtn.setOnAction(e -> {
 			int selectedIndex = mailmanList.getSelectionModel().getSelectedIndices().get(0);
-			ShipmentController.removeItem(selectedIndex);
+			MailmanController.removeItem(selectedIndex);
 			updateListHeader();
 		});
 	}
