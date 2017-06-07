@@ -73,9 +73,9 @@ public class PathGenerator {
 			Mailman closest = mailmen.get(0);
 			double minDist = Double.MAX_VALUE;
 			for (Mailman m: mailmen) {
-				if (distances.getDistance(paths.get(m).getLastShipment(), s) < minDist) {
+				if (distances.getDistance(paths.get(m).getLastStep().getShipment(), s) < minDist) {
 					closest = m;
-					minDist = distances.getDistance(paths.get(m).getLastShipment(), s);
+					minDist = distances.getDistance(paths.get(m).getLastStep().getShipment(), s);
 				}
 			}
 			paths.get(closest).add(s, distances);

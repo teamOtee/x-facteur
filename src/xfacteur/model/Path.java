@@ -4,61 +4,78 @@ import java.util.LinkedList;
 
 //this class represents a path for a single mailman
 public class Path {
+	//a nested class
+	public static class PathStep {
+		protected Shipment shipment;
+		protected double distanceToNext;
+		
+		public PathStep(Shipment shipment, double distanceToNext) {
+			this.shipment = shipment;
+			this.distanceToNext = distanceToNext;
+		}
+
+		public void setShipment(Shipment shipment) {
+			this.shipment = shipment;
+		}
+
+		public void setDistanceToNext(double distanceToNext) {
+			this.distanceToNext = distanceToNext;
+		}
+
+		public Shipment getShipment() { return shipment; }
+		public double getDistanceToNext() { return distanceToNext; }
+	}
+
+	//attributes
 	protected Mailman mailman;
-	protected LinkedList<Shipment> shipments;
-	protected LinkedList<Double> distancesToNext;
+	protected LinkedList<PathStep> steps;
 
 	public Path(Mailman mailman, Shipment startPoint) {
 		this.mailman = mailman;
-		this.shipments = new LinkedList<Shipment>();
-		shipments.add(startPoint);
-		this.distancesToNext = new LinkedList<Double>();
-		distancesToNext.add(0.0);
+		this.steps = new LinkedList<PathStep>();
+		steps.add(new PathStep(startPoint, 0));
 	}
 
 	public Mailman getMailman() { return mailman; }
-	public LinkedList<Shipment> getShipments() { return shipments; }
-	public LinkedList<Double> getDistancesToNext() { return distancesToNext; }
-	public Shipment getShipment(int i) { return shipments.get(i); }
-	public double getDistanceToNext(int i) { return distancesToNext.get(i); }
-	public int size() { return shipments.size(); }
-	public Shipment getLastShipment() { return shipments.get(size() - 1); }
+	public LinkedList<PathStep> getSteps() { return steps; }
+	public Shipment getShipment(int i) { return steps.get(i).getShipment(); }
+	public double getDistanceToNext(int i) { return steps.get(i).getDistanceToNext(); }
+	public int size() { return steps.size(); }
+	public PathStep getLastStep() { return steps.getLast(); }
 
 	public void add(Shipment s, DistanceMatrix distanceMatrix) {
-		distancesToNext.set(size() - 1, distanceMatrix.getDistance(getLastShipment(), s));
-		shipments.add(s);
-		distancesToNext.add(distanceMatrix.getDistance(s, getShipment(0)));
+		steps.add(new PathStep(s, distanceMatrix.getDistance(getLastStep().getShipment(), s)));
 	}
 
 	public double sumDistance() {
 		double ret = 0;
-		for (Double d: distancesToNext) {
-			ret += d;
+		for (PathStep step: steps) {
+			ret += step.getDistanceToNext();
 		}
 		return ret;
 	}
 
-	public void swap(Shipment s1, Shipment s2, DistanceMatrix distanceMatrix) {
-		if ((s1 != s2) && shipments.contains(s1) && shipments.contains(s2) && distanceMatrix.getShipments().contains(s1) && distanceMatrix.getShipments().contains(s2)) {
-			int i1 = shipments.indexOf(s1);
-			int i2 = shipments.indexOf(s2);
-			shipments.set(i1, s2);
-			shipments.set(i2, s1);
+	public void swap(int i1, int i2, DistanceMatrix distanceMatrix) {
+		if ((i1 != i2) && (i1 >= 0) && (i2 >= 0) && (i1 < size()) && (i2 < size())) {
+			PathStep step1 = steps.get(i1);
+			PathStep step2 = steps.get(i2);
+			steps.set(i1, step2);
+			steps.set(i2, step1);
 			if (i1 > 0) {
-				distancesToNext.set(i1 - 1, distanceMatrix.getDistance(shipments.get(i1 - 1), s2));
+				steps.get(i1 - 1).setDistanceToNext(distanceMatrix.getDistance(getShipment(i1 - 1), getShipment(i1)));
 			}
-			if (i1 < shipments.size() - 1) {
-				distancesToNext.set(i1, distanceMatrix.getDistance(s2, shipments.get(i1 + 1)));
+			if (i1 < size() - 1) {
+				steps.get(i1).setDistanceToNext(distanceMatrix.getDistance(getShipment(i1), getShipment(i1 + 1)));
 			} else {
-				distancesToNext.set(i1, distanceMatrix.getDistance(s2, shipments.get(0)));
+				steps.get(i1).setDistanceToNext(distanceMatrix.getDistance(getShipment(i1), getShipment(0)));
 			}
 			if (i2 > 0) {
-				distancesToNext.set(i2 - 1, distanceMatrix.getDistance(shipments.get(i2 - 1), s1));
+				steps.get(i2 - 1).setDistanceToNext(distanceMatrix.getDistance(getShipment(i2), getShipment(i2)));
 			}
-			if (i2 < shipments.size() - 1) {
-				distancesToNext.set(i2, distanceMatrix.getDistance(s1, shipments.get(i2 + 1)));
+			if (i2 < size() - 1) {
+				steps.get(i2).setDistanceToNext(distanceMatrix.getDistance(getShipment(i2), getShipment(i2 + 1)));
 			} else {
-				distancesToNext.set(i2, distanceMatrix.getDistance(s1, shipments.get(0)));
+				steps.get(i2).setDistanceToNext(distanceMatrix.getDistance(getShipment(i2), getShipment(0)));
 			}
 		}
 	}
