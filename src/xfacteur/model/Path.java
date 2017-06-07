@@ -1,15 +1,19 @@
 package xfacteur.model;
 
+import javafx.beans.property.StringProperty;
+import javafx.beans.property.SimpleStringProperty;
 import java.util.LinkedList;
 
 //this class represents a path for a single mailman
 public class Path {
 	//a nested class
 	public static class PathStep {
+		protected final Path path;
 		protected Shipment shipment;
 		protected double distanceToNext;
 		
-		public PathStep(Shipment shipment, double distanceToNext) {
+		public PathStep(Path path, Shipment shipment, double distanceToNext) {
+			this.path = path;
 			this.shipment = shipment;
 			this.distanceToNext = distanceToNext;
 		}
@@ -24,6 +28,14 @@ public class Path {
 
 		public Shipment getShipment() { return shipment; }
 		public double getDistanceToNext() { return distanceToNext; }
+
+		public StringProperty shipmentProperty() {
+			return new SimpleStringProperty("" + shipment);
+		}
+
+		public StringProperty distanceToNextProperty() {
+			return new SimpleStringProperty("" + distanceToNext);
+		}
 	}
 
 	//attributes
@@ -33,7 +45,7 @@ public class Path {
 	public Path(Mailman mailman, Shipment startPoint) {
 		this.mailman = mailman;
 		this.steps = new LinkedList<PathStep>();
-		steps.add(new PathStep(startPoint, 0));
+		steps.add(new PathStep(this, startPoint, 0));
 	}
 
 	public Mailman getMailman() { return mailman; }
@@ -44,7 +56,7 @@ public class Path {
 	public PathStep getLastStep() { return steps.getLast(); }
 
 	public void add(Shipment s, DistanceMatrix distanceMatrix) {
-		steps.add(new PathStep(s, distanceMatrix.getDistance(getLastStep().getShipment(), s)));
+		steps.add(new PathStep(this, s, distanceMatrix.getDistance(getLastStep().getShipment(), s)));
 	}
 
 	public double sumDistance() {
