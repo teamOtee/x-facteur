@@ -3,6 +3,8 @@ package xfacteur.model;
 import java.net.URLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.net.Proxy;
+import java.net.InetSocketAddress;
 import java.io.UnsupportedEncodingException;
 import java.io.InputStream;
 import java.util.Scanner;
@@ -48,7 +50,7 @@ public class DistanceMatrixHTTPGetter {
 		URLConnection connection = null;
 		InputStream response = null;
 		try {
-			connection = new URL(queryURL).openConnection();
+			connection = new URL(queryURL).openConnection(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("129.20.239.11", 3128)));
 			connection.setRequestProperty("Accept-Charset", charset);
 			response = connection.getInputStream();
 		} catch (Exception e) {
