@@ -16,6 +16,8 @@ public class MapView extends Group {
 	public MapView() {
 		System.setProperty("http.proxyHost", "129.20.239.11");
 		System.setProperty("http.proxyPort", "3128");
+		System.setProperty("https.proxyHost", "129.20.239.11");
+		System.setProperty("https.proxyPort", "3128");
 		grid.setHgap(4);
 		grid.setVgap(8);
 		GridPane.setMargin(wView, new Insets(20));
