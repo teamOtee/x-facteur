@@ -41,13 +41,22 @@ public class HomePage extends Stage {
 			System.exit(0);
 		});
 		fileM.getItems().add(quitMI);
+
+		Menu configM = new Menu("Configuration");
+		MenuItem proxyMI = new MenuItem("Proxy…");
+		proxyMI.setOnAction(e -> {
+			ConfigController.openProxyModal();
+		});
+		configM.getItems().add(proxyMI);
+
 		Menu helpM = new Menu("Aide");
 		MenuItem aboutMI = new MenuItem("À propos");
 		aboutMI.setOnAction(e -> {
 			XFacteur.showAbout();
 		});
 		helpM.getItems().add(aboutMI);
-		menuBar.getMenus().addAll(fileM, helpM);
+
+		menuBar.getMenus().addAll(fileM, configM, helpM);
 		bordP.setTop(menuBar);
 
 		// right: MailmanView & ShipmentView
@@ -65,3 +74,4 @@ public class HomePage extends Stage {
 		return bordP;
 	}
 }
+
