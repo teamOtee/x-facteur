@@ -6,10 +6,12 @@ import javafx.stage.Modality;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.text.Text;
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import xfacteur.model.Mailman;
 
 public class MailmanEditModal extends Stage {
@@ -28,14 +30,18 @@ public class MailmanEditModal extends Stage {
 	public MailmanEditModal() {
 		this.setTitle("Ajouter un envoi — X Facteur");
 		this.initModality(Modality.APPLICATION_MODAL);
-		this.setScene(new Scene(content()));
+		this.getIcons().add(new Image("file:media/logo.png"));
 		makeInteractivity();
+		this.setMaxWidth(300);
+		this.setMaxHeight(300);
+		this.setScene(new Scene(content()));
 	}
 
 	protected GridPane content() {
 		gridP.setHgap(8);
-		gridP.setVgap(4);
-		gridP.add(header, 0, 0, 3, 1);
+		gridP.setVgap(6);
+		gridP.setPadding(new Insets(20, 20, 20, 20));
+		gridP.add(header, 0, 0, 2, 1);
 		gridP.add(mailmanNameL, 0, 1);
 		gridP.add(mailmanName, 1, 1, 2, 1);
 		gridP.add(mailmanLastnameL, 0, 2);
