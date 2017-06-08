@@ -30,7 +30,7 @@ public class MailmanEditModal extends Stage {
 	protected Mailman value = null;
 
 	public MailmanEditModal() {
-		this.setTitle("Ajouter un Facteur — X Facteur");
+		this.setTitle("Ajouter un facteur — X Facteur");
 		this.initModality(Modality.APPLICATION_MODAL);
 		this.getIcons().add(new Image(XFacteur.LOGOPATH));
 		makeInteractivity();
@@ -85,13 +85,13 @@ public class MailmanEditModal extends Stage {
 			mailmanLastname.setText(s.getlastname());
 			mailmanName.setText(s.getname());
 			driver.setSelected(s.isDriver());
-			this.setTitle("Éditer un Facteur — X Facteur");
+			this.setTitle("Éditer un facteur — X Facteur");
 			okBtn.setDisable(false);
 		} else {
 			mailmanName.clear();
 			mailmanLastname.clear();
 			driver.setSelected(false);
-			this.setTitle("Ajouter un Facteur — X Facteur");
+			this.setTitle("Ajouter un facteur — X Facteur");
 		}
 	}
 

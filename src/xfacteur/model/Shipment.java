@@ -3,16 +3,16 @@ package xfacteur.model;
 public class Shipment {
 	protected String street;
 	protected String city;
-	protected boolean driving;
+	protected boolean driven;
 
 	public Shipment(String street, String city, boolean driving) {
 		this.street = street;
 		this.city = city;
-		this.driving = driving;
+		this.driven = driven;
 	}
 
 	public String toString() {
-		return (isDriving() ? "(en voiture) - " : "(à pied) - ") + street + ", " + city;
+		return (isDriven() ? "(en voiture)" : "(à pied)") + " - " + street + ", " + city;
 	}
 
 	public String getStreet() {
@@ -27,7 +27,7 @@ public class Shipment {
 		return street + ", " + city;
 	}
 
-	public boolean isDriving() {
-		return driving;
+	public boolean isDriven() {
+		return driven;
 	}
 }

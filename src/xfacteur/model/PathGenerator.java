@@ -17,7 +17,7 @@ public class PathGenerator {
 		List<Shipment> walkingShipments = new ArrayList<Shipment>();
 
 		for (Shipment shipment: shipments) {
-			if (shipment.isDriving()) {
+			if (shipment.isDriven()) {
 				drivingShipments.add(shipment);
 			} else {
 				walkingShipments.add(shipment);

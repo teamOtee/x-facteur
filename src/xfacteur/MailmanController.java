@@ -18,8 +18,7 @@ public class MailmanController {
 	 */
 
 	// inaccessible constructor
-	protected MailmanController() {
-	}
+	protected MailmanController() {}
 
 	// attributes
 	protected static ObservableList<Mailman> items = FXCollections
@@ -44,17 +43,17 @@ public class MailmanController {
 		MailmanController.items = items;
 	}
 
-	public static void setItem(int i, Mailman s) {
-		items.set(i, s);
+	public static void setItem(int i, Mailman m) {
+		items.set(i, m);
 	}
 
-	public static void addItem(Mailman s) {
-		items.add(s);
+	public static void addItem(Mailman m) {
+		items.add(m);
 	}
 
-	public static void removeItem(Mailman s) {
-		if (deletionConfirmation()) {
-			items.remove(s);
+	public static void removeItem(Mailman m) {
+		if (deletionConfirmation(m)) {
+			items.remove(m);
 		}
 	}
 
@@ -72,12 +71,12 @@ public class MailmanController {
 		}
 	}
 
-	public static void openEditModal(Mailman s) {
-		editModal.initValue(s);
+	public static void openEditModal(Mailman m) {
+		editModal.initValue(m);
 		editModal.showAndWait();
-		Mailman inputS = editModal.getValue();
-		if (inputS != null) {
-			setItem(items.indexOf(s), inputS);
+		Mailman inputM = editModal.getValue();
+		if (inputM != null) {
+			setItem(items.indexOf(m), inputM);
 		}
 	}
 
@@ -85,9 +84,8 @@ public class MailmanController {
 		openEditModal(getItem(i));
 	}
 
-	public static boolean deletionConfirmation() {
-		Alert confirmModal = new Alert(Alert.AlertType.WARNING, "mailmanList.getSelectionModel().getSelectedIndices().get(0);",
-				ButtonType.OK, ButtonType.CANCEL);
+	public static boolean deletionConfirmation(Mailman m) {
+		Alert confirmModal = new Alert(Alert.AlertType.WARNING, "" + m, ButtonType.OK, ButtonType.CANCEL);
 		confirmModal.setHeaderText("Êtes-vous sûr de vouloir supprimer ce facteur ?");
 		Optional<ButtonType> result = confirmModal.showAndWait();
 		return result.isPresent() && result.get() == ButtonType.OK;

@@ -22,8 +22,8 @@ public class ShipmentEditModal extends Stage {
 	protected Label addressCityL = new Label("Ville :");
 	protected TextField addressStreet = new TextField();
 	protected TextField addressCity = new TextField();
-	protected Label drivingL = new Label("Colis :");
-	protected CheckBox driving = new CheckBox();
+	protected Label drivenL = new Label("Colis :");
+	protected CheckBox driven = new CheckBox();
 	protected Button okBtn = new Button("OK");
 	protected Button cancelBtn = new Button("Annuler");
 	protected Shipment value = null;
@@ -48,8 +48,8 @@ public class ShipmentEditModal extends Stage {
 		gridP.add(addressStreet, 1, 1, 2, 1);
 		gridP.add(addressCityL, 0, 2);
 		gridP.add(addressCity, 1, 2, 2, 1);
-		gridP.add(drivingL, 0, 3);
-		gridP.add(driving, 1, 3);
+		gridP.add(drivenL, 0, 3);
+		gridP.add(driven, 1, 3);
 		GridPane.setHalignment(okBtn, HPos.RIGHT);
 		GridPane.setHalignment(cancelBtn, HPos.RIGHT);
 		okBtn.setPrefWidth(80);
@@ -69,7 +69,7 @@ public class ShipmentEditModal extends Stage {
 			okBtn.setDisable(addressStreet.getText().isEmpty() || addressCity.getText().isEmpty());
 		});
 		okBtn.setOnAction(e -> {
-			this.value = new Shipment(addressStreet.getText(), addressCity.getText(), driving.isSelected());
+			this.value = new Shipment(addressStreet.getText(), addressCity.getText(), driven.isSelected());
 			this.close();
 		});
 		cancelBtn.setOnAction(e -> {
@@ -83,13 +83,13 @@ public class ShipmentEditModal extends Stage {
 		if (s != null) {
 			addressStreet.setText(s.getStreet());
 			addressCity.setText(s.getCity());
-			driving.setSelected(s.isDriving());
+			driven.setSelected(s.isDriven());
 			this.setTitle("Éditer un envoi — X Facteur");
 			okBtn.setDisable(false);
 		} else {
 			addressStreet.clear();
 			addressCity.clear();
-			driving.setSelected(false);
+			driven.setSelected(false);
 			this.setTitle("Ajouter un envoi — X Facteur");
 		}
 	}
