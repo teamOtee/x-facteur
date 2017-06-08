@@ -41,7 +41,7 @@ public class ShipmentEditModal extends Stage {
 	protected GridPane content() {
 		gridP.setHgap(8);
 		gridP.setVgap(6);
-		gridP.setPadding(new Insets(20, 20, 20, 20));
+		gridP.setPadding(new Insets(10, 20, 12, 20));
 		gridP.add(header, 0, 0, 2, 1);
 		gridP.add(addressStreetL, 0, 1);
 		gridP.add(addressStreet, 1, 1, 2, 1);
@@ -51,6 +51,8 @@ public class ShipmentEditModal extends Stage {
 		gridP.add(driving, 1, 3);
 		GridPane.setHalignment(okBtn, HPos.RIGHT);
 		GridPane.setHalignment(cancelBtn, HPos.RIGHT);
+		okBtn.setPrefWidth(80);
+		cancelBtn.setPrefWidth(80);
 		gridP.add(okBtn, 1, 4);
 		gridP.add(cancelBtn, 2, 4);
 

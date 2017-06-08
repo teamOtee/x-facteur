@@ -20,12 +20,7 @@ public class Mailman {
 	}
 
 	public String toString() {
-		String aff = lastName + " " + name;
-		if (driver) {
-			return aff + " (permis)";
-		} else {
-			return aff;
-		}
+		return (isDriver() ? "(Permis) - " : "") + lastName + ", " + name;
 	}
 	public boolean isDriver() {
 		return driver;

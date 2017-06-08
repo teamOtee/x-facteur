@@ -89,6 +89,7 @@ public class ShipmentController {
 		Alert confirmModal = new Alert(Alert.AlertType.WARNING, "Êtes-vous sûr de vouloir supprimer cet envoi ?",
 				ButtonType.OK, ButtonType.CANCEL);
 		Optional<ButtonType> result = confirmModal.showAndWait();
+		confirmModal.setHeaderText("Êtes-vous sûr de vouloir supprimer cet envoi ?");
 		return result.isPresent() && result.get() == ButtonType.OK;
 	}
 }

@@ -77,6 +77,6 @@ public class ShipmentView extends Group {
 
 	protected void updateListHeader() {
 		listHeader
-				.setText(shipmentList.getItems().size() + " envoi" + (shipmentList.getItems().size() != 1 ? "s" : ""));
+				.setText(shipmentList.getItems().size() + " Envoi" + (shipmentList.getItems().size() != 1 ? "s" : ""));
 	}
 }

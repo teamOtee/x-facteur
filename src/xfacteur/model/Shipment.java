@@ -12,7 +12,7 @@ public class Shipment {
 	}
 
 	public String toString() {
-		return (isDriving() ? "(en voiture)" : "(à pied)") + " " + street + ", " + city;
+		return (isDriving() ? "(en voiture) - " : "(à pied) - ") + street + ", " + city;
 	}
 
 	public String getStreet() {
