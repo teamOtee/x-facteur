@@ -86,8 +86,9 @@ public class MailmanController {
 	}
 
 	public static boolean deletionConfirmation() {
-		Alert confirmModal = new Alert(Alert.AlertType.WARNING, "Êtes-vous sûr de vouloir supprimer ce facteur ?",
+		Alert confirmModal = new Alert(Alert.AlertType.WARNING, "mailmanList.getSelectionModel().getSelectedIndices().get(0);",
 				ButtonType.OK, ButtonType.CANCEL);
+		confirmModal.setHeaderText("Êtes-vous sûr de vouloir supprimer ce facteur ?");
 		Optional<ButtonType> result = confirmModal.showAndWait();
 		return result.isPresent() && result.get() == ButtonType.OK;
 	}

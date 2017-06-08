@@ -12,6 +12,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.text.Text;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+
+import xfacteur.XFacteur;
 import xfacteur.model.Mailman;
 
 public class MailmanEditModal extends Stage {
@@ -28,13 +30,14 @@ public class MailmanEditModal extends Stage {
 	protected Mailman value = null;
 
 	public MailmanEditModal() {
-		this.setTitle("Ajouter un envoi — X Facteur");
+		this.setTitle("Ajouter un Facteur — X Facteur");
 		this.initModality(Modality.APPLICATION_MODAL);
-		this.getIcons().add(new Image("file:media/logo.png"));
+		this.getIcons().add(new Image(XFacteur.LOGOPATH));
 		makeInteractivity();
 		this.setMaxWidth(300);
 		this.setMaxHeight(300);
 		this.setScene(new Scene(content()));
+		this.setResizable(false);
 	}
 
 	protected GridPane content() {
@@ -42,14 +45,16 @@ public class MailmanEditModal extends Stage {
 		gridP.setVgap(6);
 		gridP.setPadding(new Insets(20, 20, 20, 20));
 		gridP.add(header, 0, 0, 2, 1);
-		gridP.add(mailmanNameL, 0, 1);
-		gridP.add(mailmanName, 1, 1, 2, 1);
-		gridP.add(mailmanLastnameL, 0, 2);
-		gridP.add(mailmanLastname, 1, 2, 2, 1);
+		gridP.add(mailmanNameL, 0, 2);
+		gridP.add(mailmanName, 1, 2, 2, 1);
+		gridP.add(mailmanLastnameL, 0, 1);
+		gridP.add(mailmanLastname, 1, 1, 2, 1);
 		gridP.add(drivingL, 0, 3);
 		gridP.add(driver, 1, 3);
 		GridPane.setHalignment(okBtn, HPos.RIGHT);
 		GridPane.setHalignment(cancelBtn, HPos.RIGHT);
+		okBtn.setPrefWidth(80);
+		cancelBtn.setPrefWidth(80);
 		gridP.add(okBtn, 1, 4);
 		gridP.add(cancelBtn, 2, 4);
 
@@ -80,7 +85,7 @@ public class MailmanEditModal extends Stage {
 			mailmanLastname.setText(s.getlastname());
 			mailmanName.setText(s.getname());
 			driver.setSelected(s.isDriver());
-			this.setTitle("Editer un Facteur — X Facteur");
+			this.setTitle("Éditer un Facteur — X Facteur");
 			okBtn.setDisable(false);
 		} else {
 			mailmanName.clear();

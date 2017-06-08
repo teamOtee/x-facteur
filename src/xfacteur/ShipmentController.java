@@ -86,10 +86,10 @@ public class ShipmentController {
 	}
 
 	public static boolean deletionConfirmation() {
-		Alert confirmModal = new Alert(Alert.AlertType.WARNING, "Êtes-vous sûr de vouloir supprimer cet envoi ?",
+		Alert confirmModal = new Alert(Alert.AlertType.WARNING, "ShimentView.getItems",
 				ButtonType.OK, ButtonType.CANCEL);
-		Optional<ButtonType> result = confirmModal.showAndWait();
 		confirmModal.setHeaderText("Êtes-vous sûr de vouloir supprimer cet envoi ?");
+		Optional<ButtonType> result = confirmModal.showAndWait();
 		return result.isPresent() && result.get() == ButtonType.OK;
 	}
 }

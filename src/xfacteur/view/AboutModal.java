@@ -1,11 +1,13 @@
 package xfacteur.view;
 
 import javafx.stage.Stage;
+import xfacteur.XFacteur;
 import javafx.stage.Modality;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.control.Button;
 import javafx.geometry.Pos;
 
@@ -22,6 +24,7 @@ public class AboutModal extends Stage {
 		makeLayout();
 		addContent();
 		makeInteractivity();
+		this.getIcons().add(new Image(XFacteur.LOGOPATH));
 	}
 
 	protected void makeLayout() {

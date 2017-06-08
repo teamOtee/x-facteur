@@ -25,7 +25,7 @@ public class HomePage extends Stage {
 
 	public HomePage() {
 		// Paramètres Page d'accueil
-		this.getIcons().add(new Image("file:media/logo.png"));
+		this.getIcons().add(new Image(XFacteur.LOGOPATH));
 		this.setMaximized(true);
 		this.setScene(new Scene(content()));
 		this.setTitle("X Facteur");

@@ -12,6 +12,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.text.Text;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import xfacteur.XFacteur;
 import xfacteur.model.Shipment;
 
 public class ShipmentEditModal extends Stage {
@@ -33,7 +34,7 @@ public class ShipmentEditModal extends Stage {
 		this.setScene(new Scene(content()));
 		makeInteractivity();
 		this.setResizable(false);
-		this.getIcons().add(new Image("file:media/logo.png"));
+		this.getIcons().add(new Image(XFacteur.LOGOPATH));
 		this.setMaxWidth(280);
 		this.setMaxHeight(300);
 	}
@@ -83,7 +84,7 @@ public class ShipmentEditModal extends Stage {
 			addressStreet.setText(s.getStreet());
 			addressCity.setText(s.getCity());
 			driving.setSelected(s.isDriving());
-			this.setTitle("Editer un envoi — X Facteur");
+			this.setTitle("Éditer un envoi — X Facteur");
 			okBtn.setDisable(false);
 		} else {
 			addressStreet.clear();
