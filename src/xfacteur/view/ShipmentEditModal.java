@@ -34,7 +34,7 @@ public class ShipmentEditModal extends Stage {
 		makeInteractivity();
 		this.setResizable(false);
 		this.getIcons().add(new Image("file:media/logo.png"));
-		this.setMaxWidth(300);
+		this.setMaxWidth(280);
 		this.setMaxHeight(300);
 	}
 
