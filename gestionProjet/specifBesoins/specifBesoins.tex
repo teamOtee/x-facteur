@@ -1,0 +1,41 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{jipkg}
+
+\title{X Facteur\\Spécifications des besoins}
+\author{Groupe I1·3 : Cléo \textsc{Daguin}, Léo \textsc{Massy} \& Quentin \textsc{Ribac}}
+\date{\today}
+\jihypersetup{X Facteur — Spécifications des besoins}{Groupe I1·3 : Cléo DAGUIN, Léo MASSY \& Quentin RIBAC}
+
+\begin{document}
+\maketitle
+
+\jisec{Rappel du sujet}
+Le sujet que nous avions choisi était \emph{la tournée du facteur}. La définition qui nous en avait été donnée était la suivante :
+\\
+
+\begin{quotation}
+Nous souhaitons proposer le chemin que devra suivre un facteur pour sa tournée dans Lannion. Le but de ce projet est donc de proposer une application qui permettra d'afficher la route à suivre pour un facteur.
+
+La poste a une liste de courriers (lettre, colis, plis rapides, etc.) à distribuer. Les colis et plis rapides nécessitent des moyens de transport pour lesquels tous les facteurs n'ont pas l'habilitation. Certaines rues piétonnes obligent les facteurs à faire leur tournée à pied. L'ensemble du courrier qu'ils doivent livrer ne peut alors pas porter et il doivent retourner à la poste prendre le reste de la distribution.
+
+Certaines rues (non piétonnes) sont à sens unique.
+
+L'application doit afficher les adresses et nombre de lettres/colis par lesquelles le facteur doit passer. 
+
+Bien sûr l'algorithme pour trouver les parcours des facteurs doit être choisi de façon à permettre une dépense minimale en temps, carburant et avec le moins possible de facteurs.
+\end{quotation}
+
+\jisec{Besoins fonctionnels}
+\begin{itemize}
+	\item gestion des facteurs (ajout, édition, suppression)
+	\item gestion des envois (ajout, édition, suppression)
+	\item affichage du trajet en détails (nombre, type, distance des envois pour chaque facteur)
+\end{itemize}
+
+\jisec{Besoins non fonctionnels}
+\begin{itemize}
+	\item enregistrement et lecture des données dans des fichiers
+\end{itemize}
+
+\end{document}
+
