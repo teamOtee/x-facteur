@@ -6,11 +6,12 @@ import javafx.stage.Modality;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.text.Text;
 import javafx.geometry.HPos;
-
+import javafx.geometry.Insets;
 import xfacteur.model.Shipment;
 
 public class ShipmentEditModal extends Stage {
@@ -31,12 +32,17 @@ public class ShipmentEditModal extends Stage {
 		this.initModality(Modality.APPLICATION_MODAL);
 		this.setScene(new Scene(content()));
 		makeInteractivity();
+		this.setResizable(false);
+		this.getIcons().add(new Image("file:media/logo.png"));
+		this.setMaxWidth(300);
+		this.setMaxHeight(300);
 	}
 
 	protected GridPane content() {
 		gridP.setHgap(8);
-		gridP.setVgap(4);
-		gridP.add(header, 0, 0, 3, 1);
+		gridP.setVgap(6);
+		gridP.setPadding(new Insets(20, 20, 20, 20));
+		gridP.add(header, 0, 0, 2, 1);
 		gridP.add(addressStreetL, 0, 1);
 		gridP.add(addressStreet, 1, 1, 2, 1);
 		gridP.add(addressCityL, 0, 2);
