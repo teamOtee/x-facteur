@@ -50,7 +50,7 @@ public class DistanceMatrixHTTPGetter {
 		URLConnection connection = null;
 		InputStream response = null;
 		try {
-			connection = new URL(queryURL).openConnection(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("129.20.239.11", 3128)));
+			connection = new URL(queryURL).openConnection();
 			connection.setRequestProperty("Accept-Charset", charset);
 			response = connection.getInputStream();
 		} catch (Exception e) {
