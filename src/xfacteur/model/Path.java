@@ -36,6 +36,10 @@ public class Path {
 		public StringProperty distanceToNextProperty() {
 			return new SimpleStringProperty("" + distanceToNext);
 		}
+
+		public StringProperty sumDistanceProperty() {
+			return new SimpleStringProperty("" + path.sumDistance(this));
+		}
 	}
 
 	//attributes
@@ -60,11 +64,23 @@ public class Path {
 	}
 
 	public double sumDistance() {
-		double ret = 0;
+		double ret = 0.0;
 		for (PathStep step: steps) {
 			ret += step.getDistanceToNext();
 		}
 		return ret;
+	}
+
+	public double sumDistance(int lim) {
+		double ret = 0.0;
+		for (int i = 0; i < lim; i++) {
+			ret += steps.get(i).getDistanceToNext();
+		}
+		return ret;
+	}
+
+	public double sumDistance(PathStep limStep) {
+		return sumDistance(steps.indexOf(limStep));
 	}
 
 	public void swap(int i1, int i2, DistanceMatrix distanceMatrix) {
