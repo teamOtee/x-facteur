@@ -12,6 +12,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.text.Text;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+
 import xfacteur.XFacteur;
 import xfacteur.model.Shipment;
 
