@@ -2,6 +2,8 @@ package xfacteur;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+
+import xfacteur.view.HomePage;
 import xfacteur.view.AboutModal;
 
 public class XFacteur extends Application {

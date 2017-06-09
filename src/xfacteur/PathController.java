@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 
 import xfacteur.model.Path;
 import xfacteur.model.PathGenerator;
+import xfacteur.view.PathView;
 
 public class PathController {
 	//inaccessible constructor
@@ -12,6 +13,7 @@ public class PathController {
 
 	//attributes
 	protected static ObservableList<Path> paths = FXCollections.observableArrayList();
+	protected static PathView view = new PathView();
 
 	public static void generate() {
 		paths.addAll(PathGenerator.genPaths(MailmanController.getItems(), ShipmentController.getItems()).values());
@@ -25,5 +27,7 @@ public class PathController {
 			System.out.println(p.getMailman() + ": " + p.size() + " shipments, " + p.sumDistance() + " km");
 		}
 	}
+
+	public static PathView getView() { return view; }
 }
 

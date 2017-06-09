@@ -1,4 +1,4 @@
-package xfacteur;
+package xfacteur.view;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -10,7 +10,11 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 
+import xfacteur.XFacteur;
+import xfacteur.MailmanController;
 import xfacteur.ShipmentController;
+import xfacteur.PathController;
+import xfacteur.ConfigController;
 import xfacteur.view.ShipmentView;
 import xfacteur.view.MailmanView;
 import xfacteur.view.MapView;
@@ -21,6 +25,7 @@ public class HomePage extends Stage {
 	protected TabPane tabs = new TabPane();
 	protected MailmanView mailmanView = MailmanController.getView();
 	protected ShipmentView shipmentView = ShipmentController.getView();
+	protected PathView pathView = PathController.getView();
 	protected MapView mapView = new MapView();
 
 	public HomePage() {
@@ -59,7 +64,7 @@ public class HomePage extends Stage {
 		menuBar.getMenus().addAll(fileM, configM, helpM);
 		bordP.setTop(menuBar);
 
-		// right: MailmanView & ShipmentView
+		// left: MailmanView & ShipmentView
 		tabs.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 		tabs.setTabMinWidth(120);
 
@@ -67,7 +72,10 @@ public class HomePage extends Stage {
 		Tab shipmentTab = new Tab("Envois", shipmentView);
 		tabs.getTabs().addAll(mailmanTab, shipmentTab);
 
-		bordP.setRight(tabs);
+		bordP.setLeft(tabs);
+
+		// right: PathView
+		bordP.setRight(pathView);
 
 		// center: MapView
 		bordP.setCenter(mapView);
