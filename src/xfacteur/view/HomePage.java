@@ -25,7 +25,6 @@ public class HomePage extends Stage {
 	protected TabPane tabs = new TabPane();
 	protected MailmanView mailmanView = MailmanController.getView();
 	protected ShipmentView shipmentView = ShipmentController.getView();
-	protected PathView pathView = PathController.getView();
 	protected MapView mapView = new MapView();
 
 	public HomePage() {
@@ -73,9 +72,6 @@ public class HomePage extends Stage {
 		tabs.getTabs().addAll(mailmanTab, shipmentTab);
 
 		bordP.setLeft(tabs);
-
-		// right: PathView
-		bordP.setRight(pathView);
 
 		// center: MapView
 		bordP.setCenter(mapView);

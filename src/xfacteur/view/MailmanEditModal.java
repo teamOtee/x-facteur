@@ -23,7 +23,7 @@ public class MailmanEditModal extends Stage {
 	protected Label mailmanLastnameL = new Label("Nom :");
 	protected TextField mailmanName = new TextField();
 	protected TextField mailmanLastname = new TextField();
-	protected Label drivingL = new Label("Permis :");
+	protected Label driverL = new Label("Permis :");
 	protected CheckBox driver = new CheckBox();
 	protected Button okBtn = new Button("OK");
 	protected Button cancelBtn = new Button("Annuler");
@@ -33,11 +33,11 @@ public class MailmanEditModal extends Stage {
 		this.setTitle("Ajouter un facteur — X Facteur");
 		this.initModality(Modality.APPLICATION_MODAL);
 		this.getIcons().add(new Image(XFacteur.LOGOPATH));
-		makeInteractivity();
 		this.setMaxWidth(300);
 		this.setMaxHeight(300);
-		this.setScene(new Scene(content()));
 		this.setResizable(false);
+		this.setScene(new Scene(content()));
+		makeInteractivity();
 	}
 
 	protected GridPane content() {
@@ -49,7 +49,7 @@ public class MailmanEditModal extends Stage {
 		gridP.add(mailmanName, 1, 2, 2, 1);
 		gridP.add(mailmanLastnameL, 0, 1);
 		gridP.add(mailmanLastname, 1, 1, 2, 1);
-		gridP.add(drivingL, 0, 3);
+		gridP.add(driverL, 0, 3);
 		gridP.add(driver, 1, 3);
 		GridPane.setHalignment(okBtn, HPos.RIGHT);
 		GridPane.setHalignment(cancelBtn, HPos.RIGHT);
