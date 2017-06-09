@@ -22,7 +22,7 @@ public class PathView extends Stage {
 	protected TableView<Path.PathStep> pathTable = new TableView<Path.PathStep>();
 	protected Path path;
 
-	//constructor
+	// constructor
 	public PathView() {
 		this.setTitle("Affichage d’un chemin — X Facteur");
 		this.getIcons().add(new Image(XFacteur.LOGOPATH));

@@ -43,7 +43,7 @@ public class MailmanEditModal extends Stage {
 	protected GridPane content() {
 		gridP.setHgap(8);
 		gridP.setVgap(6);
-		gridP.setPadding(new Insets(20, 20, 20, 20));
+		gridP.setPadding(new Insets(10, 20, 12, 20));
 		gridP.add(header, 0, 0, 2, 1);
 		gridP.add(mailmanNameL, 0, 2);
 		gridP.add(mailmanName, 1, 2, 2, 1);

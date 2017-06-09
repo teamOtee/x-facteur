@@ -35,14 +35,14 @@ public class ProxyModal extends Stage {
 		makeInteractivity();
 		this.setResizable(false);
 		this.getIcons().add(new Image("file:media/logo.png"));
-		this.setMaxWidth(280);
+		this.setMaxWidth(400);
 		this.setMaxHeight(300);
 	}
 
 	protected GridPane content() {
 		gridP.setHgap(8);
 		gridP.setVgap(6);
-		gridP.setPadding(new Insets(20, 20, 20, 20));
+		gridP.setPadding(new Insets(10, 20, 12, 20));
 		gridP.add(header, 0, 0, 2, 1);
 		gridP.add(useProxyL, 0, 1);
 		gridP.add(useProxy, 1, 1);
@@ -52,6 +52,8 @@ public class ProxyModal extends Stage {
 		gridP.add(port, 1, 3, 2, 1);
 		GridPane.setHalignment(okBtn, HPos.RIGHT);
 		GridPane.setHalignment(cancelBtn, HPos.RIGHT);
+		okBtn.setPrefWidth(80);
+		cancelBtn.setPrefWidth(80);
 		gridP.add(okBtn, 1, 4);
 		gridP.add(cancelBtn, 2, 4);
 
