@@ -5,14 +5,14 @@ public class Shipment implements java.io.Serializable{
 	protected String city;
 	protected boolean driven;
 
-	public Shipment(String street, String city, boolean driving) {
+	public Shipment(String street, String city, boolean driven) {
 		this.street = street;
 		this.city = city;
 		this.driven = driven;
 	}
 
 	public String toString() {
-		return (isDriven() ? "(en voiture)" : "(à pied)") + " - " + street + ", " + city;
+		return (isDriven() ? "(colis)" : "(lettre)") + " - " + street + ", " + city;
 	}
 
 	public String getStreet() {
