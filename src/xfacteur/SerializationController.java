@@ -11,9 +11,6 @@ public class SerializationController {
 	//inaccessible constructor
 	protected SerializationController() {}
 
-
-
-
 	public static void serialization(String file1, String file2){
 		//Output of Shipments
 		ObjectOutputStream oos = null;
@@ -64,18 +61,13 @@ public class SerializationController {
 		}
 	}
 
-
-
 	public static void deserialization(String file1, String file2){
 		//Input of Shipments
 		ObjectInputStream ois = null;
 		try {
 			final FileInputStream fileIn1 = new FileInputStream(file1);
 			ois = new ObjectInputStream(fileIn1);
-
-			addItem((Shipment)ois.readObject())
-
-
+			ShipmentController.addItem((Shipment) ois.readObject());
 		}catch (final java.io.IOException e) {
 			e.printStackTrace();
 		} catch (final ClassNotFoundException e) {
@@ -88,7 +80,6 @@ public class SerializationController {
 			} catch (final IOException ex) {
 				ex.printStackTrace();
 			}
-
 		}
 
 		//Input of Mailmans
@@ -96,11 +87,7 @@ public class SerializationController {
 		try {
 			final FileInputStream fileIn2 = new FileInputStream(file2);
 			ois = new ObjectInputStream(fileIn2);
-
-
-			addItem((Mailman)ois.readObject())
-
-
+			MailmanController.addItem((Mailman) ois.readObject());
 		}catch (final java.io.IOException e) {
 			e.printStackTrace();
 		} catch (final ClassNotFoundException e) {
@@ -113,7 +100,7 @@ public class SerializationController {
 			} catch (final IOException ex) {
 				ex.printStackTrace();
 			}
-
 		}
 	}
+}
 
