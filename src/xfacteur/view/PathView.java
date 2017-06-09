@@ -1,16 +1,15 @@
 package xfacteur.view;
 
-import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.scene.Parent;
 
 public class PathView extends Parent {
-	//attributes
+	// attributes
 	protected HBox container = new HBox(4);
 	protected Text header = new Text("Un chemin");
 
-	//constructor
+	// constructor
 	public PathView() {
 		this.getChildren().add(container);
 		makeLayout();
@@ -25,4 +24,3 @@ public class PathView extends Parent {
 		//
 	}
 }
-
