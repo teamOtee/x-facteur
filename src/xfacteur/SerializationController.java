@@ -45,24 +45,24 @@ public class SerializationController {
 
 		// Output of Mailmans
 
-		ObjectOutputStream oos = null;
+		ObjectOutputStream oos2 = null;
 		try {
 			final FileOutputStream fileOut2 = new FileOutputStream(file2 + ".mail");
-			oos = new ObjectOutputStream(fileOut2);
+			oos2 = new ObjectOutputStream(fileOut2);
 			for (Shipment s : ShipmentController.getItems()) {
-				oos.writeObject(s);
+				oos2.writeObject(s);
 			}
 			for (Mailman m : MailmanController.getItems()) {
-				oos.writeObject(s);
+				oos2.writeObject(m);
 			}
-			oos.flush();
+			oos2.flush();
 		} catch (final java.io.IOException e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (oos != null) {
-					oos.flush();
-					oos.close();
+				if (oos2 != null) {
+					oos2.flush();
+					oos2.close();
 				}
 			} catch (final IOException ex) {
 				ex.printStackTrace();
@@ -92,19 +92,19 @@ public class SerializationController {
 		}
 
 		// Input of Mailmans
-		ObjectInputStream ois = null;
+		ObjectInputStream ois2 = null;
 		try {
 			final FileInputStream fileIn2 = new FileInputStream(file2);
-			ois = new ObjectInputStream(fileIn2);
-			MailmanController.addItem((Mailman) ois.readObject());
+			ois2 = new ObjectInputStream(fileIn2);
+			MailmanController.addItem((Mailman) ois2.readObject());
 		} catch (final java.io.IOException e) {
 			e.printStackTrace();
 		} catch (final ClassNotFoundException e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (ois != null) {
-					ois.close();
+				if (ois2 != null) {
+					ois2.close();
 				}
 			} catch (final IOException ex) {
 				ex.printStackTrace();
