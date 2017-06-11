@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import org.json.JSONObject;
 
 public class DistanceMatrixHTTPGetter {
+	@SuppressWarnings("finally")
 	public static DistanceMatrix getDistanceMatrix(List<Shipment> shipments) {
 		int nbShipments = shipments.size();
 		String origins = "";
@@ -69,6 +70,7 @@ public class DistanceMatrixHTTPGetter {
 
 	public static void CLITest() {
 		// get origins and dest from user input
+		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Donnez une liste de lieux :");
 		List<Shipment> shipments = new ArrayList<Shipment>();
