@@ -32,7 +32,7 @@ public class PathController {
 			System.out.println(p.getMailman() + ": " + p.size() + " shipments, " + p.sumDistance() + " km");
 		}
 		if (!items.isEmpty()) {
-			pathView.setPath(items.get(0));
+			pathView.reload();
 			pathView.show();
 		}
 	}

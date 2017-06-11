@@ -20,9 +20,9 @@ public class MailmanEditModal extends Stage {
 	protected GridPane gridP = new GridPane();
 	protected Text header = new Text("Veuillez remplir tous les champs :");
 	protected Label mailmanNameL = new Label("Prénom :");
-	protected Label mailmanLastnameL = new Label("Nom :");
+	protected Label mailmanLastNameL = new Label("Nom :");
 	protected TextField mailmanName = new TextField();
-	protected TextField mailmanLastname = new TextField();
+	protected TextField mailmanLastName = new TextField();
 	protected Label driverL = new Label("Permis :");
 	protected CheckBox driver = new CheckBox();
 	protected Button okBtn = new Button("OK");
@@ -47,8 +47,8 @@ public class MailmanEditModal extends Stage {
 		gridP.add(header, 0, 0, 2, 1);
 		gridP.add(mailmanNameL, 0, 2);
 		gridP.add(mailmanName, 1, 2, 2, 1);
-		gridP.add(mailmanLastnameL, 0, 1);
-		gridP.add(mailmanLastname, 1, 1, 2, 1);
+		gridP.add(mailmanLastNameL, 0, 1);
+		gridP.add(mailmanLastName, 1, 1, 2, 1);
 		gridP.add(driverL, 0, 3);
 		gridP.add(driver, 1, 3);
 		GridPane.setHalignment(okBtn, HPos.RIGHT);
@@ -64,13 +64,13 @@ public class MailmanEditModal extends Stage {
 	protected void makeInteractivity() {
 		okBtn.setDisable(true);
 		mailmanName.setOnKeyReleased(e -> {
-			okBtn.setDisable(mailmanName.getText().isEmpty() || mailmanLastname.getText().isEmpty());
+			okBtn.setDisable(mailmanName.getText().isEmpty() || mailmanLastName.getText().isEmpty());
 		});
-		mailmanLastname.setOnKeyReleased(e -> {
-			okBtn.setDisable(mailmanName.getText().isEmpty() || mailmanLastname.getText().isEmpty());
+		mailmanLastName.setOnKeyReleased(e -> {
+			okBtn.setDisable(mailmanName.getText().isEmpty() || mailmanLastName.getText().isEmpty());
 		});
 		okBtn.setOnAction(e -> {
-			this.value = new Mailman(driver.isSelected(), mailmanLastname.getText(), mailmanName.getText());
+			this.value = new Mailman(driver.isSelected(), mailmanLastName.getText(), mailmanName.getText());
 			this.close();
 		});
 		cancelBtn.setOnAction(e -> {
@@ -82,14 +82,14 @@ public class MailmanEditModal extends Stage {
 	public void initValue(Mailman s) {
 		this.value = s;
 		if (s != null) {
-			mailmanLastname.setText(s.getLastName());
+			mailmanLastName.setText(s.getLastName());
 			mailmanName.setText(s.getName());
 			driver.setSelected(s.isDriver());
 			this.setTitle("Éditer un facteur — X Facteur");
 			okBtn.setDisable(false);
 		} else {
 			mailmanName.clear();
-			mailmanLastname.clear();
+			mailmanLastName.clear();
 			driver.setSelected(false);
 			this.setTitle("Ajouter un facteur — X Facteur");
 		}
@@ -99,3 +99,4 @@ public class MailmanEditModal extends Stage {
 		return value;
 	}
 }
+
