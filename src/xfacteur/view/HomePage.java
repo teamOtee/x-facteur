@@ -28,7 +28,6 @@ public class HomePage extends Stage {
 	protected MailmanView mailmanView = MailmanController.getView();
 	protected ShipmentView shipmentView = ShipmentController.getView();
 	protected MapView mapView = new MapView();
-	protected FileChooser fileChooser = new FileChooser();
 
 	public HomePage() {
 		// Paramètres Page d'accueil
@@ -45,37 +44,37 @@ public class HomePage extends Stage {
 		Menu fileM = new Menu("Fichier");
 		MenuItem openMMI = new MenuItem("Ouvrir des facteurs");
 		MenuItem openSMI = new MenuItem("Ouvrir des envois");
-		MenuItem saveasMMI = new MenuItem("Enregistrer des facteurs sous...");
-		MenuItem saveasSMI = new MenuItem("Enregistrer des envois sous...");
+		MenuItem saveMI = new MenuItem("Enregistrer");
+		MenuItem saveasMI = new MenuItem("Enregistrer sous...");
 		MenuItem quitMI = new MenuItem("Quitter");
+		FileChooser fileChooserM = new FileChooser();
+		FileChooser fileChooserS = new FileChooser();
+		fileChooserM.setTitle("Ouvrir des facteurs");
+		fileChooserM.getExtensionFilters().add(new ExtensionFilter("Fihiers facteurs",".xmen"));
+		fileChooserS.setTitle("Ouvrir des envois");
+		fileChooserS.getExtensionFilters().add(new ExtensionFilter("Fihiers envois",".xship"));
 
 		openMMI.setOnAction(e -> {
-			fileChooser.setTitle("Ouvrir des facteurs...");
-			fileChooser.getExtensionFilters().setAll(new ExtensionFilter("Fihiers facteurs", ".xmen"));
-			fileChooser.showOpenDialog(this);
+			fileChooserM.showOpenDialog(this);
 		});
 
 		openSMI.setOnAction(e -> {
-			fileChooser.setTitle("Ouvrir des envois...");
-			fileChooser.getExtensionFilters().setAll(new ExtensionFilter("Fihiers envois", ".xship"));
-			fileChooser.showOpenDialog(this);
-		});
-		saveasMMI.setOnAction(e -> {
-			fileChooser.setTitle("Enregistrer des facteurs sous...");
-			fileChooser.getExtensionFilters().setAll(new ExtensionFilter("Fihiers facteurs", ".xmen"));
-			fileChooser.showSaveDialog(this);
+			fileChooserS.showOpenDialog(this);
 		});
 
-		saveasSMI.setOnAction(e -> {
-			fileChooser.setTitle("Enregistrer des envois sous...");
-			fileChooser.getExtensionFilters().setAll(new ExtensionFilter("Fihiers envois", ".xship"));
-			fileChooser.showSaveDialog(this);
+		saveMI.setOnAction(e -> {
+			// enregistre les données
 		});
+
+		saveasMI.setOnAction(e -> {
+            SerializationModal serModal = new SerializationModal();
+            serModal.showAndWait();
+        });
 
 		quitMI.setOnAction(e -> {
 			System.exit(0);
 		});
-		fileM.getItems().addAll(openMMI, openSMI, saveasMMI, saveasSMI, quitMI);
+		fileM.getItems().addAll(openMMI, openSMI, saveMI, saveasMI, quitMI);
 
 		Menu configM = new Menu("Configuration");
 		MenuItem proxyMI = new MenuItem("Proxy…");
