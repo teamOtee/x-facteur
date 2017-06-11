@@ -43,16 +43,16 @@ public class HomePage extends Stage {
 		// top: MenuBar
 		Menu fileM = new Menu("Fichier");
 		MenuItem openMMI = new MenuItem("Ouvrir des facteurs");
-		MenuItem openSMI = new MenuItem("Ouvrir");
+		MenuItem openSMI = new MenuItem("Ouvrir des envois");
 		MenuItem saveMI = new MenuItem("Enregistrer");
 		MenuItem saveasMI = new MenuItem("Enregistrer sous...");
 		MenuItem quitMI = new MenuItem("Quitter");
 		FileChooser fileChooserM = new FileChooser();
 		FileChooser fileChooserS = new FileChooser();
 		fileChooserM.setTitle("Ouvrir des facteurs");
-		fileChooserM.getExtensionFilters().add(new ExtensionFilter(".xmen"));
-		fileChooserS.setTitle("Ouvrir des Envois");
-		fileChooserM.getExtensionFilters().add(new ExtensionFilter(".xship"));
+		fileChooserM.getExtensionFilters().add(new ExtensionFilter("Fihiers facteurs",".xmen"));
+		fileChooserS.setTitle("Ouvrir des envois");
+		fileChooserS.getExtensionFilters().add(new ExtensionFilter("Fihiers envois",".xship"));
 
 		openMMI.setOnAction(e -> {
 			fileChooserM.showOpenDialog(this);
