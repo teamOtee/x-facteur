@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import javafx.collections.ObservableList;
 import xfacteur.model.Mailman;
 import xfacteur.model.Shipment;
 
@@ -68,7 +69,7 @@ public class SerializationController {
 		try {
 			final FileInputStream fileIn1 = new FileInputStream(file1);
 			ois = new ObjectInputStream(fileIn1);
-			ShipmentController.setItems((Shipment) ois.readObject());
+			ShipmentController.setItems((ObservableList<Shipment>) ois.readObject());
 		} catch (final java.io.IOException e) {
 			System.out.println("IO Exception while reading file");
 			e.printStackTrace();
@@ -90,7 +91,7 @@ public class SerializationController {
 		try {
 			final FileInputStream fileIn2 = new FileInputStream(file2);
 			ois2 = new ObjectInputStream(fileIn2);
-			MailmanController.setItems((Mailman) ois2.readObject());
+			MailmanController.setItems((ObservableList<Mailman>) ois2.readObject());
 		} catch (final java.io.IOException e) {
 			e.printStackTrace();
 			System.out.println("IO Exception while reading file");

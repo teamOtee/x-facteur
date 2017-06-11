@@ -40,11 +40,20 @@ public class HomePage extends Stage {
 
 		// top: MenuBar
 		Menu fileM = new Menu("Fichier");
+		MenuItem openMI = new MenuItem("Ouvrir");
 		MenuItem saveMI = new MenuItem("Enregistrer");
+		MenuItem saveasMI = new MenuItem("Enregistrer sous...");
 		MenuItem quitMI = new MenuItem("Quitter");
 		
+		openMI.setOnAction(e -> {
+			// enregistre les données
+		});
 		
 		saveMI.setOnAction(e -> {
+			// enregistre les données
+		});
+		
+		saveasMI.setOnAction(e -> {
 			// enregistre les données
 		});
 		
@@ -52,7 +61,7 @@ public class HomePage extends Stage {
 		quitMI.setOnAction(e -> {
 			System.exit(0);
 		});
-		fileM.getItems().addAll( saveMI,quitMI);
+		fileM.getItems().addAll( openMI,saveMI, saveasMI,quitMI);
 
 		Menu configM = new Menu("Configuration");
 		MenuItem proxyMI = new MenuItem("Proxy…");
