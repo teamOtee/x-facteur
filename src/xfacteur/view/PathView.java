@@ -47,6 +47,7 @@ public class PathView extends Stage {
 		container.getChildren().addAll(tabs, closeBtn);
 	}
 
+	@SuppressWarnings("unchecked")
 	public void reload() {
 		tabs.getTabs().clear();
 		for (Path path: PathController.getItems()) {
@@ -59,13 +60,13 @@ public class PathView extends Stage {
 			pathTable.setItems(FXCollections.observableList(path.getSteps()));
 			
 			TableColumn<Path.PathStep, String> shipmentCol = new TableColumn<Path.PathStep, String>("Envois");
-			shipmentCol.setCellValueFactory(new PropertyValueFactory("shipment"));
+			shipmentCol.setCellValueFactory(new PropertyValueFactory<Path.PathStep, String>("shipment"));
 			
 			TableColumn<Path.PathStep, String> distanceToNextCol = new TableColumn<Path.PathStep, String>("Distances au suivant (km)");
-			distanceToNextCol.setCellValueFactory(new PropertyValueFactory("distanceToNext"));
+			distanceToNextCol.setCellValueFactory(new PropertyValueFactory<Path.PathStep, String>("distanceToNext"));
 			
 			TableColumn<Path.PathStep, String> sumDistanceCol = new TableColumn<Path.PathStep, String>("Distances cumulées (km)");
-			sumDistanceCol.setCellValueFactory(new PropertyValueFactory("sumDistance"));
+			sumDistanceCol.setCellValueFactory(new PropertyValueFactory<Path.PathStep, String>("sumDistance"));
 			
 			pathTable.getColumns().setAll(shipmentCol, distanceToNextCol, sumDistanceCol);
 			

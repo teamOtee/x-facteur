@@ -7,13 +7,16 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import javafx.collections.ObservableList;
+import java.util.ArrayList;
+import javafx.collections.FXCollections;
 
 import xfacteur.model.Mailman;
 import xfacteur.model.Shipment;
 
 public class SerializationController {
 	// inaccessible constructor
-	protected SerializationController() {}
+	protected SerializationController() {
+	}
 
 	// Output of Shipments
 	public static void saveShipments(File file) {
@@ -21,7 +24,7 @@ public class SerializationController {
 		try {
 			final FileOutputStream fileOut = new FileOutputStream(file);
 			oos = new ObjectOutputStream(fileOut);
-			oos.writeObject(ShipmentController.getItems());
+			oos.writeObject(new ArrayList<Shipment>(ShipmentController.getItems()));
 			oos.flush();
 		} catch (final IOException e) {
 			System.out.println("I/O Exception while writing to file");
@@ -45,7 +48,7 @@ public class SerializationController {
 		try {
 			final FileOutputStream fileOut = new FileOutputStream(file);
 			oos = new ObjectOutputStream(fileOut);
-			oos.writeObject(MailmanController.getItems());
+			oos.writeObject(new ArrayList<Mailman>(MailmanController.getItems()));
 			oos.flush();
 		} catch (final IOException e) {
 			System.out.println("I/O Exception while writing to file");
@@ -64,12 +67,13 @@ public class SerializationController {
 	}
 
 	// Input of Shipments
+	@SuppressWarnings("unchecked")
 	public static void openShipments(File file) {
 		ObjectInputStream ois = null;
 		try {
 			final FileInputStream fileIn = new FileInputStream(file);
 			ois = new ObjectInputStream(fileIn);
-			ShipmentController.setItems((ObservableList<Shipment>) ois.readObject());
+			ShipmentController.setItems(FXCollections.observableList((ArrayList<Shipment>) ois.readObject()));
 		} catch (final IOException e) {
 			System.out.println("I/O Exception while reading file");
 			e.printStackTrace();
@@ -90,12 +94,13 @@ public class SerializationController {
 	}
 
 	// Input of Mailmans
+	@SuppressWarnings("unchecked")
 	public static void openMailmen(File file) {
 		ObjectInputStream ois = null;
 		try {
 			final FileInputStream fileIn = new FileInputStream(file);
 			ois = new ObjectInputStream(fileIn);
-			MailmanController.setItems((ObservableList<Mailman>) ois.readObject());
+			MailmanController.setItems(FXCollections.observableList((ArrayList<Mailman>) ois.readObject()));
 		} catch (final IOException e) {
 			e.printStackTrace();
 			System.out.println("I/O Exception while reading file");

@@ -53,25 +53,25 @@ public class HomePage extends Stage {
 
 		openMMI.setOnAction(e -> {
 			fileChooser.setTitle("Ouvrir des facteurs…");
-			fileChooser.getExtensionFilters().setAll(new ExtensionFilter("Fichiers facteurs",".xmen"));
+			fileChooser.getExtensionFilters().setAll(new ExtensionFilter("Fichiers facteurs","*.xmen"));
 			SerializationController.openMailmen(fileChooser.showOpenDialog(this));
 		});
 
 		openSMI.setOnAction(e -> {
 			fileChooser.setTitle("Ouvrir des envois…");
-			fileChooser.getExtensionFilters().setAll(new ExtensionFilter("Fichiers envois",".xship"));
+			fileChooser.getExtensionFilters().setAll(new ExtensionFilter("Fichiers envois","*.xship"));
 			SerializationController.openShipments(fileChooser.showOpenDialog(this));
 		});
 
 		saveasMMI.setOnAction(e -> {
 			fileChooser.setTitle("Enregistrer des facteurs sous…");
-			fileChooser.getExtensionFilters().setAll(new ExtensionFilter("Fichiers facteurs",".xmen"));
+			fileChooser.getExtensionFilters().setAll(new ExtensionFilter("Fichiers facteurs","*.xmen"));
 			SerializationController.saveMailmen(fileChooser.showSaveDialog(this));
 		});
 
 		saveasSMI.setOnAction(e -> {
 			fileChooser.setTitle("Enregistrer des envois sous…");
-			fileChooser.getExtensionFilters().setAll(new ExtensionFilter("Fichiers envois",".xship"));
+			fileChooser.getExtensionFilters().setAll(new ExtensionFilter("Fichiers envois","*.xship"));
 			SerializationController.saveShipments(fileChooser.showSaveDialog(this));
         });
 
