@@ -13,18 +13,18 @@ import xfacteur.model.Shipment;
 
 public class SerializationController {
 	// inaccessible constructor
-	protected SerializationController() {
-	}
+	protected SerializationController() {}
 
-	public static void serializationS(File file1) {
-		// Output of Shipments
+	// Output of Shipments
+	public static void saveShipments(File file) {
 		ObjectOutputStream oos = null;
 		try {
-			final FileOutputStream fileOut1 = new FileOutputStream(file1);
-			oos = new ObjectOutputStream(fileOut1);
+			final FileOutputStream fileOut = new FileOutputStream(file);
+			oos = new ObjectOutputStream(fileOut);
 			oos.writeObject(ShipmentController.getItems());
 			oos.flush();
-		} catch (final java.io.IOException e) {
+		} catch (final IOException e) {
+			System.out.println("I/O Exception while writing to file");
 			e.printStackTrace();
 		} finally {
 			try {
@@ -33,32 +33,28 @@ public class SerializationController {
 					oos.close();
 				}
 			} catch (final IOException ex) {
+				System.out.println("I/O Exception while writing to file");
 				ex.printStackTrace();
 			}
 		}
 	}
 
-	public static void serializationM(File file2) {
-
-		// Output of Mailmans
-
-		ObjectOutputStream oos2 = null;
+	// Output of Mailmen
+	public static void saveMailmen(File file) {
+		ObjectOutputStream oos = null;
 		try {
-			final FileOutputStream fileOut2 = new FileOutputStream(file2);
-			oos2 = new ObjectOutputStream(fileOut2);
-			for (Shipment s : ShipmentController.getItems()) {
-				oos2.writeObject(s);
-			}
-			oos2.writeObject(MailmanController.getItems());
-			oos2.flush();
-		} catch (final java.io.IOException e) {
+			final FileOutputStream fileOut = new FileOutputStream(file);
+			oos = new ObjectOutputStream(fileOut);
+			oos.writeObject(MailmanController.getItems());
+			oos.flush();
+		} catch (final IOException e) {
 			System.out.println("I/O Exception while writing to file");
 			e.printStackTrace();
 		} finally {
 			try {
-				if (oos2 != null) {
-					oos2.flush();
-					oos2.close();
+				if (oos != null) {
+					oos.flush();
+					oos.close();
 				}
 			} catch (final IOException ex) {
 				System.out.println("I/O Exception while writing to file");
@@ -67,53 +63,55 @@ public class SerializationController {
 		}
 	}
 
-	public static void deserializationS(File file1) {
-		// Input of Shipments
+	// Input of Shipments
+	public static void openShipments(File file) {
 		ObjectInputStream ois = null;
 		try {
-			final FileInputStream fileIn1 = new FileInputStream(file1);
-			ois = new ObjectInputStream(fileIn1);
+			final FileInputStream fileIn = new FileInputStream(file);
+			ois = new ObjectInputStream(fileIn);
 			ShipmentController.setItems((ObservableList<Shipment>) ois.readObject());
-		} catch (final java.io.IOException e) {
-			System.out.println("IO Exception while reading file");
+		} catch (final IOException e) {
+			System.out.println("I/O Exception while reading file");
 			e.printStackTrace();
 		} catch (final ClassNotFoundException e) {
 			e.printStackTrace();
-			System.out.println("File format is wrong");
+			System.out.println("Incorrect file format");
 		} finally {
 			try {
 				if (ois != null) {
 					ois.close();
 				}
 			} catch (final IOException ex) {
+				System.out.println("I/O Exception while reading file");
 				ex.printStackTrace();
 			}
 		}
 
 	}
 
-	public static void deserializationM(File file2) {
-
-		// Input of Mailmans
-		ObjectInputStream ois2 = null;
+	// Input of Mailmans
+	public static void openMailmen(File file) {
+		ObjectInputStream ois = null;
 		try {
-			final FileInputStream fileIn2 = new FileInputStream(file2);
-			ois2 = new ObjectInputStream(fileIn2);
-			MailmanController.setItems((ObservableList<Mailman>) ois2.readObject());
-		} catch (final java.io.IOException e) {
+			final FileInputStream fileIn = new FileInputStream(file);
+			ois = new ObjectInputStream(fileIn);
+			MailmanController.setItems((ObservableList<Mailman>) ois.readObject());
+		} catch (final IOException e) {
 			e.printStackTrace();
-			System.out.println("IO Exception while reading file");
+			System.out.println("I/O Exception while reading file");
 		} catch (final ClassNotFoundException e) {
-			System.out.println("File format is wrong");
+			System.out.println("Incorrect file format");
 			e.printStackTrace();
 		} finally {
 			try {
-				if (ois2 != null) {
-					ois2.close();
+				if (ois != null) {
+					ois.close();
 				}
 			} catch (final IOException ex) {
+				System.out.println("I/O Exception while reading file");
 				ex.printStackTrace();
 			}
 		}
 	}
 }
+

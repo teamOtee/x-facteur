@@ -56,3 +56,4 @@ public class PathView extends Stage {
 		// rien pour l’instant
 	}
 }
+

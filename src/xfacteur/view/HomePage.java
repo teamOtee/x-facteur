@@ -17,6 +17,7 @@ import xfacteur.XFacteur;
 import xfacteur.MailmanController;
 import xfacteur.ShipmentController;
 import xfacteur.ConfigController;
+import xfacteur.SerializationController;
 import xfacteur.PathController;
 import xfacteur.view.ShipmentView;
 import xfacteur.view.MailmanView;
@@ -49,30 +50,29 @@ public class HomePage extends Stage {
 		MenuItem saveasMMI = new MenuItem("Enregistrer des facteurs sous...");
 		MenuItem saveasSMI = new MenuItem("Enregistrer des envois sous...");
 		MenuItem quitMI = new MenuItem("Quitter");
-		fileChooser.setTitle("Ouvrir des facteurs");
-		fileChooser.getExtensionFilters().add(new ExtensionFilter("Fihiers facteurs",".xmen"));
-		fileChooser.setTitle("Ouvrir des envois");
 
 		openMMI.setOnAction(e -> {
-			fileChooser.getExtensionFilters().setAll(new ExtensionFilter("Fihiers facteurs",".xmen"));
-			fileChooser.showOpenDialog(this);
+			fileChooser.setTitle("Ouvrir des facteurs…");
+			fileChooser.getExtensionFilters().setAll(new ExtensionFilter("Fichiers facteurs",".xmen"));
+			SerializationController.openMailmen(fileChooser.showOpenDialog(this));
 		});
 
 		openSMI.setOnAction(e -> {
-			fileChooser.getExtensionFilters().setAll(new ExtensionFilter("Fihiers envois",".xship"));
-			fileChooser.showOpenDialog(this);
+			fileChooser.setTitle("Ouvrir des envois…");
+			fileChooser.getExtensionFilters().setAll(new ExtensionFilter("Fichiers envois",".xship"));
+			SerializationController.openShipments(fileChooser.showOpenDialog(this));
 		});
 
 		saveasMMI.setOnAction(e -> {
-			fileChooser.getExtensionFilters().setAll(new ExtensionFilter("Fihiers facteurs",".xmen"));
-			fileChooser.showSaveDialog(this);
+			fileChooser.setTitle("Enregistrer des facteurs sous…");
+			fileChooser.getExtensionFilters().setAll(new ExtensionFilter("Fichiers facteurs",".xmen"));
+			SerializationController.saveMailmen(fileChooser.showSaveDialog(this));
 		});
 
 		saveasSMI.setOnAction(e -> {
-            //SerializationModal serModal = new SerializationModal();
-            //serModal.showAndWait();
-			fileChooser.getExtensionFilters().setAll(new ExtensionFilter("Fihiers envois",".xship"));
-			fileChooser.showSaveDialog(this);
+			fileChooser.setTitle("Enregistrer des envois sous…");
+			fileChooser.getExtensionFilters().setAll(new ExtensionFilter("Fichiers envois",".xship"));
+			SerializationController.saveShipments(fileChooser.showSaveDialog(this));
         });
 
 		quitMI.setOnAction(e -> {

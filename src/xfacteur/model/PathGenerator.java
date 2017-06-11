@@ -45,12 +45,12 @@ public class PathGenerator {
 
 		// generate paths for driving mailmen
 		if ((drivingShipments.size() > 0) && (drivingMailmen.size() > 0)) {
-			drivingPaths = initBasicPaths(drivingMailmen, drivingShipments, drivingDistances);
+			drivingPaths = initBasicPaths(drivingMailmen, drivingShipments, new Shipment(postOffice.getStreet(), postOffice.getCity(), true), drivingDistances);
 		}
 
 		// generate paths for walking mailmen
 		if ((walkingShipments.size() > 0) && (walkingMailmen.size() > 0)) {
-			walkingPaths = initBasicPaths(walkingMailmen, walkingShipments, walkingDistances);
+			walkingPaths = initBasicPaths(walkingMailmen, walkingShipments, new Shipment(postOffice.getStreet(), postOffice.getCity(), false), walkingDistances);
 		}
 
 		// return result
@@ -61,12 +61,11 @@ public class PathGenerator {
 	}
 
 	// basic paths: a simple loop for every mailman
-	protected static Map<Mailman, Path> initBasicPaths(List<Mailman> mailmen, List<Shipment> shipments,
-			DistanceMatrix distances) {
+	protected static Map<Mailman, Path> initBasicPaths(List<Mailman> mailmen, List<Shipment> shipments, Shipment postOffice, DistanceMatrix distances) {
 		// an empty path for every mailman
 		Map<Mailman, Path> paths = new HashMap<Mailman, Path>();
 		for (Mailman m : mailmen) {
-			paths.put(m, new Path(m, shipments.get(0)));
+			paths.put(m, new Path(m, postOffice));
 		}
 
 		// for every shipment, add it to the currently closest mailman
