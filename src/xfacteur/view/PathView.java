@@ -26,7 +26,6 @@ public class PathView extends Stage {
 		this.getIcons().add(new Image(XFacteur.LOGOPATH));
 		this.setResizable(false);
 		this.setScene(new Scene(container));
-		this.sizeToScene();
 		makeLayout();
 		makeInteractivity();
 		this.setWidth(600);
