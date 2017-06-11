@@ -1,5 +1,6 @@
 package xfacteur.view;
 
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
@@ -13,7 +14,6 @@ import javafx.scene.control.MenuItem;
 import xfacteur.XFacteur;
 import xfacteur.MailmanController;
 import xfacteur.ShipmentController;
-import xfacteur.PathController;
 import xfacteur.ConfigController;
 import xfacteur.view.ShipmentView;
 import xfacteur.view.MailmanView;
@@ -69,6 +69,7 @@ public class HomePage extends Stage {
 
 		Tab mailmanTab = new Tab("Facteurs", mailmanView);
 		Tab shipmentTab = new Tab("Envois", shipmentView);
+		tabs.setPadding(new Insets(0, 0, 0, 20));
 		tabs.getTabs().addAll(mailmanTab, shipmentTab);
 
 		bordP.setLeft(tabs);
