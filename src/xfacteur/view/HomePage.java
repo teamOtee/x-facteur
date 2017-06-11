@@ -3,6 +3,8 @@ package xfacteur.view;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.TabPane;
@@ -40,28 +42,38 @@ public class HomePage extends Stage {
 
 		// top: MenuBar
 		Menu fileM = new Menu("Fichier");
-		MenuItem openMI = new MenuItem("Ouvrir");
+		MenuItem openMMI = new MenuItem("Ouvrir des facteurs");
+		MenuItem openSMI = new MenuItem("Ouvrir");
 		MenuItem saveMI = new MenuItem("Enregistrer");
 		MenuItem saveasMI = new MenuItem("Enregistrer sous...");
 		MenuItem quitMI = new MenuItem("Quitter");
-		
-		openMI.setOnAction(e -> {
-			// enregistre les données
+		FileChooser fileChooserM = new FileChooser();
+		FileChooser fileChooserS = new FileChooser();
+		fileChooserM.setTitle("Ouvrir des facteurs");
+		fileChooserM.getExtensionFilters().add(new ExtensionFilter(".xmen"));
+		fileChooserS.setTitle("Ouvrir des Envois");
+		fileChooserM.getExtensionFilters().add(new ExtensionFilter(".xship"));
+
+		openMMI.setOnAction(e -> {
+			fileChooserM.showOpenDialog(this);
 		});
-		
+
+		openSMI.setOnAction(e -> {
+			fileChooserS.showOpenDialog(this);
+		});
+
 		saveMI.setOnAction(e -> {
 			// enregistre les données
 		});
-		
+
 		saveasMI.setOnAction(e -> {
 			// enregistre les données
 		});
-		
-		
+
 		quitMI.setOnAction(e -> {
 			System.exit(0);
 		});
-		fileM.getItems().addAll( openMI,saveMI, saveasMI,quitMI);
+		fileM.getItems().addAll(openMMI, openSMI, saveMI, saveasMI, quitMI);
 
 		Menu configM = new Menu("Configuration");
 		MenuItem proxyMI = new MenuItem("Proxy…");
