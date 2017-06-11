@@ -47,6 +47,7 @@ public class SerializationController {
 			oos2.writeObject(MailmanController.getItems());
 			oos2.flush();
 		} catch (final java.io.IOException e) {
+			System.out.println("I/O Exception while writing to file");
 			e.printStackTrace();
 		} finally {
 			try {
@@ -55,6 +56,7 @@ public class SerializationController {
 					oos2.close();
 				}
 			} catch (final IOException ex) {
+				System.out.println("I/O Exception while writing to file");
 				ex.printStackTrace();
 			}
 		}
@@ -68,9 +70,11 @@ public class SerializationController {
 			ois = new ObjectInputStream(fileIn1);
 			ShipmentController.setItems((Shipment) ois.readObject());
 		} catch (final java.io.IOException e) {
+			System.out.println("IO Exception while reading file");
 			e.printStackTrace();
 		} catch (final ClassNotFoundException e) {
 			e.printStackTrace();
+			System.out.println("File format is wrong");
 		} finally {
 			try {
 				if (ois != null) {
@@ -89,7 +93,9 @@ public class SerializationController {
 			MailmanController.setItems((Mailman) ois2.readObject());
 		} catch (final java.io.IOException e) {
 			e.printStackTrace();
+			System.out.println("IO Exception while reading file");
 		} catch (final ClassNotFoundException e) {
+			System.out.println("File format is wrong");
 			e.printStackTrace();
 		} finally {
 			try {
