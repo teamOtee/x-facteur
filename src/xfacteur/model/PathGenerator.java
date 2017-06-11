@@ -11,7 +11,7 @@ public class PathGenerator {
 	}
 
 	// the access point here
-	public static Map<Mailman, Path> genPaths(List<Mailman> mailmen, List<Shipment> shipments) {
+	public static Map<Mailman, Path> genPaths(List<Mailman> mailmen, List<Shipment> shipments, Shipment postOffice, double maxTime) {
 		// sort Shipment ArrayList
 		List<Shipment> drivingShipments = new ArrayList<Shipment>();
 		List<Shipment> walkingShipments = new ArrayList<Shipment>();
