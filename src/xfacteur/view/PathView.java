@@ -5,8 +5,11 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.collections.FXCollections;
+import javafx.geometry.Insets;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 
@@ -19,16 +22,23 @@ public class PathView extends Stage {
 	protected Text header = new Text("Un chemin");
 	protected TableView<Path.PathStep> pathTable = new TableView<Path.PathStep>();
 	protected Path path;
+	protected TabPane tabs = new TabPane();
 
 	// constructor
 	public PathView() {
 		this.setTitle("Affichage d’un chemin — X Facteur");
 		this.getIcons().add(new Image(XFacteur.LOGOPATH));
 		this.setResizable(false);
-		this.setScene(new Scene(container));
+		this.setScene(new Scene(tabs));
 		makeLayout();
 		makeInteractivity();
-		this.setWidth(600);
+		this.setWidth(800);
+		container.setPadding(new Insets(10, 20, 12, 20));
+		tabs.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+		tabs.setTabMinWidth(120);
+		//pathcontroler.getItems();
+		Tab pathTableTab = new Tab(""+path.getMailman().toString(), container);
+		tabs.getTabs().addAll(pathTableTab);
 	}
 
 	// methods
