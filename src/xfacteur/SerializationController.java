@@ -1,5 +1,6 @@
 package xfacteur;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,11 +16,11 @@ public class SerializationController {
 	protected SerializationController() {
 	}
 
-	public static void serialization(String file1, String file2) {
+	public static void serializationS(File file1) {
 		// Output of Shipments
 		ObjectOutputStream oos = null;
 		try {
-			final FileOutputStream fileOut1 = new FileOutputStream(file1 + ".ship");
+			final FileOutputStream fileOut1 = new FileOutputStream(file1);
 			oos = new ObjectOutputStream(fileOut1);
 			oos.writeObject(ShipmentController.getItems());
 			oos.flush();
@@ -35,12 +36,15 @@ public class SerializationController {
 				ex.printStackTrace();
 			}
 		}
+	}
+
+	public static void serializationM(File file2) {
 
 		// Output of Mailmans
 
 		ObjectOutputStream oos2 = null;
 		try {
-			final FileOutputStream fileOut2 = new FileOutputStream(file2 + ".mail");
+			final FileOutputStream fileOut2 = new FileOutputStream(file2);
 			oos2 = new ObjectOutputStream(fileOut2);
 			for (Shipment s : ShipmentController.getItems()) {
 				oos2.writeObject(s);
@@ -63,7 +67,7 @@ public class SerializationController {
 		}
 	}
 
-	public static void deserialization(String file1, String file2) {
+	public static void deserializationS(File file1) {
 		// Input of Shipments
 		ObjectInputStream ois = null;
 		try {
@@ -85,7 +89,9 @@ public class SerializationController {
 				ex.printStackTrace();
 			}
 		}
+	}
 
+	public static void deserializationM(File file2) {
 		// Input of Mailmans
 		ObjectInputStream ois2 = null;
 		try {
