@@ -94,9 +94,6 @@ public class SerializationController {
 
 	public static void deserializationM(File file2) {
 
-    }
-    
-    
 		// Input of Mailmans
 		ObjectInputStream ois2 = null;
 		try {
