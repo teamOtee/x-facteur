@@ -40,11 +40,19 @@ public class HomePage extends Stage {
 
 		// top: MenuBar
 		Menu fileM = new Menu("Fichier");
+		MenuItem saveMI = new MenuItem("Enregistrer");
 		MenuItem quitMI = new MenuItem("Quitter");
+		
+		
+		saveMI.setOnAction(e -> {
+			// enregistre les données
+		});
+		
+		
 		quitMI.setOnAction(e -> {
 			System.exit(0);
 		});
-		fileM.getItems().add(quitMI);
+		fileM.getItems().addAll( saveMI,quitMI);
 
 		Menu configM = new Menu("Configuration");
 		MenuItem proxyMI = new MenuItem("Proxy…");
