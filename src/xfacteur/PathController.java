@@ -15,13 +15,13 @@ public class PathController {
 
 	//attributes
 	protected static ObservableList<Path> items = FXCollections.observableArrayList();
+	protected static Shipment postOffice = new Shipment("La Poste", "Lannion", false);
+	protected static double maxTime = 1.0;
 	protected static PathView pathView = new PathView();
 	protected static MapView mapView = new MapView();
-	protected static Shipment postOffice = new Shipment("", "", false);
-	protected static double maxTime = 1.0;
 
 	public static void generate() {
-		items.addAll(PathGenerator.genPaths(MailmanController.getItems(), ShipmentController.getItems(), postOffice, maxTime).values());
+		items.setAll(PathGenerator.genPaths(MailmanController.getItems(), ShipmentController.getItems(), postOffice, maxTime).values());
 	}
 
 	public static void display() {
@@ -37,6 +37,7 @@ public class PathController {
 		}
 	}
 
+	public static MapView getMapView() { return mapView; }
 	public static ObservableList<Path> getItems() { return items; }
 	public static Shipment getPostOffice() { return postOffice; }
 	public static double getMaxTime() { return maxTime; }

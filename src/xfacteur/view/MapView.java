@@ -9,6 +9,8 @@ import javafx.scene.text.Text;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.geometry.Insets;
+import javafx.scene.control.TextFormatter;
+import javafx.util.converter.DoubleStringConverter;
 
 import xfacteur.PathController;
 import xfacteur.model.Shipment;
@@ -52,6 +54,12 @@ public class MapView extends Group {
 	}
 
 	protected void makeInteractivity() {
+		// default field values and format
+		postOfficeStreet.setText(PathController.getPostOffice().getStreet());
+		postOfficeCity.setText(PathController.getPostOffice().getCity());
+		maxTime.setTextFormatter(new TextFormatter<Double>(new DoubleStringConverter(), PathController.getMaxTime()));
+
+		// genBtn disabled state
 		genBtn.setDisable(postOfficeStreet.getLength() == 0 || postOfficeCity.getLength() == 0 || maxTime.getLength() == 0);
 		postOfficeStreet.setOnKeyReleased(e -> {
 			genBtn.setDisable(postOfficeStreet.getLength() == 0 || postOfficeCity.getLength() == 0 || maxTime.getLength() == 0);
@@ -62,12 +70,16 @@ public class MapView extends Group {
 		maxTime.setOnKeyReleased(e -> {
 			genBtn.setDisable(postOfficeStreet.getLength() == 0 || postOfficeCity.getLength() == 0 || maxTime.getLength() == 0);
 		});
+
+		// genBtn action
 		genBtn.setOnAction(e -> {
 			PathController.setPostOffice(new Shipment(postOfficeStreet.getText(), postOfficeCity.getText(), false));
 			PathController.setMaxTime(Double.parseDouble(maxTime.getText()));
 			PathController.generate();
 			PathController.display();
 		});
+
+		// wView config
 		wView.getEngine().load("https://www.google.fr/maps");
 	}
 }

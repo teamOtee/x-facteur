@@ -17,6 +17,7 @@ import xfacteur.XFacteur;
 import xfacteur.MailmanController;
 import xfacteur.ShipmentController;
 import xfacteur.ConfigController;
+import xfacteur.PathController;
 import xfacteur.view.ShipmentView;
 import xfacteur.view.MailmanView;
 import xfacteur.view.MapView;
@@ -27,7 +28,7 @@ public class HomePage extends Stage {
 	protected TabPane tabs = new TabPane();
 	protected MailmanView mailmanView = MailmanController.getView();
 	protected ShipmentView shipmentView = ShipmentController.getView();
-	protected MapView mapView = new MapView();
+	protected MapView mapView = PathController.getMapView();
 	protected FileChooser fileChooser = new FileChooser();
 
 	public HomePage() {
