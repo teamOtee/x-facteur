@@ -79,4 +79,3 @@ public class HomePage extends Stage {
 		return bordP;
 	}
 }
-

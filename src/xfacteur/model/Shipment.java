@@ -1,6 +1,6 @@
 package xfacteur.model;
 
-public class Shipment implements java.io.Serializable{
+public class Shipment implements java.io.Serializable {
 	protected String street;
 	protected String city;
 	protected boolean driven;
