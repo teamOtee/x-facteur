@@ -11,7 +11,7 @@ public class Mailman {
 		this.name = n;
 	}
 	public String toString() {
-		return (isDriver() ? "(en voiture)" : "(à pied)") + " - " + lastName + ", " + name;
+		return (isDriver() ? "(en voiture)" : "(à pied)") + " – " + name + " " + lastName;
 	}
 	public boolean isDriver() {
 		return driver;
@@ -24,6 +24,5 @@ public class Mailman {
 	public String getLastName() {
 		return lastName;
 	}
-
-	
 }
+

@@ -8,10 +8,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.Button;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.geometry.Pos;
+import javafx.scene.layout.Priority;
 
 import xfacteur.XFacteur;
 import xfacteur.model.Path;
@@ -19,14 +22,16 @@ import xfacteur.PathController;
 
 public class PathView extends Stage {
 	// attributes
+	protected VBox container = new VBox(8);
 	protected TabPane tabs = new TabPane();
+	protected Button closeBtn = new Button("Fermer");
 
 	// constructor
 	public PathView() {
 		this.setTitle("Affichage d’un chemin — X Facteur");
 		this.getIcons().add(new Image(XFacteur.LOGOPATH));
 		this.setResizable(false);
-		this.setScene(new Scene(tabs));
+		this.setScene(new Scene(container));
 		makeLayout();
 		makeInteractivity();
 	}
@@ -36,6 +41,10 @@ public class PathView extends Stage {
 		this.setWidth(800);
 		tabs.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 		tabs.setTabMinWidth(120);
+		VBox.setVgrow(tabs, Priority.ALWAYS);
+		container.setAlignment(Pos.CENTER_RIGHT);
+		VBox.setMargin(closeBtn, new Insets(20));
+		container.getChildren().addAll(tabs, closeBtn);
 	}
 
 	public void reload() {
@@ -43,7 +52,7 @@ public class PathView extends Stage {
 		for (Path path: PathController.getItems()) {
 			// create one tab per path
 			VBox container = new VBox(8);
-			container.setPadding(new Insets(10, 20, 12, 20));
+			container.setPadding(new Insets(20));
 			Text header = new Text("" + path.getMailman());
 
 			TableView<Path.PathStep> pathTable = new TableView<Path.PathStep>();	
@@ -61,12 +70,14 @@ public class PathView extends Stage {
 			pathTable.getColumns().setAll(shipmentCol, distanceToNextCol, sumDistanceCol);
 			
 			container.getChildren().addAll(header, pathTable);
-			tabs.getTabs().add(new Tab(path.getMailman().getLastName(), container));
+			tabs.getTabs().add(new Tab(path.getMailman().getName().charAt(0) + ". " + path.getMailman().getLastName(), container));
 		}
 	}
 
 	protected void makeInteractivity() {
-		// rien pour l’instant
+		closeBtn.setOnAction(e -> {
+			this.close();
+		});
 	}
 }
 

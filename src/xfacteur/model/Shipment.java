@@ -12,7 +12,7 @@ public class Shipment {
 	}
 
 	public String toString() {
-		return (isDriven() ? "(colis)" : "(lettre)") + " - " + street + ", " + city;
+		return (isDriven() ? "(colis)" : "(lettre)") + " – " + street + ", " + city;
 	}
 
 	public String getStreet() {
