@@ -17,11 +17,11 @@ public class Mailman {
 		return driver;
 	}
 
-	public String getname() {
+	public String getName() {
 		return name;
 	}
 
-	public String getlastname() {
+	public String getLastName() {
 		return lastName;
 	}
 

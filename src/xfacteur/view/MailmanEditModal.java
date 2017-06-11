@@ -82,8 +82,8 @@ public class MailmanEditModal extends Stage {
 	public void initValue(Mailman s) {
 		this.value = s;
 		if (s != null) {
-			mailmanLastname.setText(s.getlastname());
-			mailmanName.setText(s.getname());
+			mailmanLastname.setText(s.getLastName());
+			mailmanName.setText(s.getName());
 			driver.setSelected(s.isDriver());
 			this.setTitle("Éditer un facteur — X Facteur");
 			okBtn.setDisable(false);

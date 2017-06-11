@@ -37,7 +37,7 @@ public class PathView extends Stage {
 		tabs.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 		tabs.setTabMinWidth(120);
 		//pathcontroler.getItems();
-		Tab pathTableTab = new Tab(""+path.getMailman().toString(), container);
+		Tab pathTableTab = new Tab(path.getMailman().getLastName(), container);
 		tabs.getTabs().addAll(pathTableTab);
 	}
 
