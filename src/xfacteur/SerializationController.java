@@ -6,8 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
 import javafx.collections.ObservableList;
+
 import xfacteur.model.Mailman;
 import xfacteur.model.Shipment;
 

@@ -8,31 +8,42 @@ import java.io.InputStream;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.nio.charset.StandardCharsets;
 import org.json.JSONObject;
 
 public class DistanceMatrixHTTPGetter {
-	public static DistanceMatrix getDistanceMatrix(List<Shipment> shipments) {
+	public static DistanceMatrix getDistanceMatrix(Shipment postOffice, List<Shipment> otherShipments) {
+		List<Shipment> shipments = new ArrayList<Shipment>();
+		shipments.add(postOffice);
+		shipments.addAll(otherShipments);
 		int nbShipments = shipments.size();
 		String origins = "";
 		for (Shipment s : shipments) {
-			origins += "|" + s.getAddress().replace(" ", "+");
+			origins += s.getAddress().replace(" ", "+") + "|";
 		}
 		origins = origins.substring(0, origins.length() - 1);
 		String destinations = origins;
 
 		// config constants
-		final String charset = java.nio.charset.StandardCharsets.UTF_8.name();
+		final String charset = StandardCharsets.UTF_8.name();
 
 		// filling and formatting request
 		String baseURL = "https://maps.googleapis.com/maps/api/distancematrix/json",
-				apiKey = "AIzaSyA5FMd2HKX15GZJdhWSbQh7Lu2PzmSkozI", language = "fr-FR", units = "metric",
+				apiKey = "AIzaSyA5FMd2HKX15GZJdhWSbQh7Lu2PzmSkozI", // DO NOT CHANGE THIS VALUE!
+				language = "fr-FR",
+				units = "metric",
 				mode = "driving";
 		String queryURL = null;
 		try {
-			queryURL = String.format("%s?key=%s&origins=%s&destinations=%s&language=%s&units=%s&mode=%s", baseURL,
-					URLEncoder.encode(apiKey, charset), URLEncoder.encode(origins, charset),
-					URLEncoder.encode(destinations, charset), URLEncoder.encode(language, charset),
-					URLEncoder.encode(units, charset), URLEncoder.encode(mode, charset));
+			queryURL = String.format("%s?key=%s&origins=%s&destinations=%s&language=%s&units=%s&mode=%s",
+				baseURL,
+				URLEncoder.encode(apiKey, charset),
+				URLEncoder.encode(origins, charset),
+				URLEncoder.encode(destinations, charset),
+				URLEncoder.encode(language, charset),
+				URLEncoder.encode(units, charset),
+				URLEncoder.encode(mode, charset)
+			);
 		} catch (UnsupportedEncodingException e) {
 			System.out.println("Erreur d’encodage des paramètres !");
 		}
@@ -49,42 +60,20 @@ public class DistanceMatrixHTTPGetter {
 		}
 
 		// displaying response on stdout
-		double[][] distances = new double[nbShipments][nbShipments];
+		DistanceMatrix distances = new DistanceMatrix(shipments);
 		try (Scanner resScan = new Scanner(response)) {
 			String responseBody = resScan.useDelimiter("\\A").next();
 			JSONObject obj = new JSONObject(responseBody);
-			for (int i = 0; i < nbShipments; i++) {
-				for (int j = 0; j < nbShipments; j++) {
-					distances[i][j] = new Double(
-							obj.query("/rows/" + i + "/elements/" + j + "/distance/value").toString()).doubleValue()
-							* 1e-3;
+			for (int i = 0; i < shipments.size(); i++) {
+				for (int j = 0; j < shipments.size(); j++) {
+					distances.set(shipments.get(i), shipments.get(j), new Double(obj.query("/rows/" + i + "/elements/" + j + "/distance/value").toString()).doubleValue()	* 1e-3);
 				}
 			}
 		} catch (Exception e) {
 			System.out.println("Erreur de lecture du contenu !");
 		} finally {
-			return new DistanceMatrix(shipments, distances);
-		}
-	}
-
-	public static void CLITest() {
-		// get origins and dest from user input
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Donnez une liste de lieux :");
-		List<Shipment> shipments = new ArrayList<Shipment>();
-		String place = "";
-		while (!(place = sc.nextLine()).isEmpty()) {
-			shipments.add(new Shipment(place, "", true));
-		}
-
-		System.out.println("Listes des distances");
-		System.out.println("====================");
-		DistanceMatrix distances = getDistanceMatrix(shipments);
-		for (Shipment from : distances.getShipments()) {
-			for (Shipment to : distances.getShipments()) {
-				System.out.println(
-						from.getAddress() + " --> " + to.getAddress() + ": " + distances.getDistance(from, to) + " km");
-			}
+			return distances;
 		}
 	}
 }
+

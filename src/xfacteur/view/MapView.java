@@ -55,8 +55,8 @@ public class MapView extends Group {
 
 	protected void makeInteractivity() {
 		// default field values and format
-		postOfficeStreet.setText(PathController.getPostOffice().getStreet());
-		postOfficeCity.setText(PathController.getPostOffice().getCity());
+		postOfficeStreet.setText(PathController.getWalkingPO().getStreet());
+		postOfficeCity.setText(PathController.getWalkingPO().getCity());
 		maxTime.setTextFormatter(new TextFormatter<Double>(new DoubleStringConverter(), PathController.getMaxTime()));
 
 		// genBtn disabled state

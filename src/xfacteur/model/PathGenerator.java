@@ -5,19 +5,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 
+import xfacteur.PathController;
+import xfacteur.ShipmentController;
+import xfacteur.MailmanController;
+
 public class PathGenerator {
 	// inaccessible constructor
-	protected PathGenerator() {
-	}
+	protected PathGenerator() {}
 
 	// the access point here
-	public static Map<Mailman, Path> genPaths(List<Mailman> mailmen, List<Shipment> shipments, Shipment postOffice,
-			double maxTime) {
+	public static Map<Mailman, Path> genPaths() {
 		// sort Shipment ArrayList
 		List<Shipment> drivingShipments = new ArrayList<Shipment>();
 		List<Shipment> walkingShipments = new ArrayList<Shipment>();
 
-		for (Shipment shipment : shipments) {
+		for (Shipment shipment : ShipmentController.getItems()) {
 			if (shipment.isDriven()) {
 				drivingShipments.add(shipment);
 			} else {
@@ -26,13 +28,13 @@ public class PathGenerator {
 		}
 
 		// get the distances
-		DistanceMatrix drivingDistances = DistanceMatrixHTTPGetter.getDistanceMatrix(drivingShipments);
-		DistanceMatrix walkingDistances = DistanceMatrixHTTPGetter.getDistanceMatrix(walkingShipments);
+		DistanceMatrix drivingDistances = DistanceMatrixHTTPGetter.getDistanceMatrix(PathController.getDrivingPO(), drivingShipments);
+		DistanceMatrix walkingDistances = DistanceMatrixHTTPGetter.getDistanceMatrix(PathController.getWalkingPO(), walkingShipments);
 
 		// sort Mailman ArrayList
 		List<Mailman> drivingMailmen = new ArrayList<Mailman>();
 		List<Mailman> walkingMailmen = new ArrayList<Mailman>();
-		for (Mailman m : mailmen) {
+		for (Mailman m : MailmanController.getItems()) {
 			if (m.isDriver()) {
 				drivingMailmen.add(m);
 			} else {
@@ -40,48 +42,42 @@ public class PathGenerator {
 			}
 		}
 
-		// paths are stored per mailman
-		Map<Mailman, Path> drivingPaths = null;
-		Map<Mailman, Path> walkingPaths = null;
-
-		// generate paths for driving mailmen
-		if ((drivingShipments.size() > 0) && (drivingMailmen.size() > 0)) {
-			drivingPaths = initBasicPaths(drivingMailmen, drivingShipments, new Shipment(postOffice.getStreet(), postOffice.getCity(), true), drivingDistances);
-		}
-
-		// generate paths for walking mailmen
-		if ((walkingShipments.size() > 0) && (walkingMailmen.size() > 0)) {
-			walkingPaths = initBasicPaths(walkingMailmen, walkingShipments, new Shipment(postOffice.getStreet(), postOffice.getCity(), false), walkingDistances);
-		}
-
-		// return result
+		// generate the paths for real, for driving and walking mailmen
 		Map<Mailman, Path> paths = new HashMap<Mailman, Path>();
-		paths.putAll(drivingPaths);
-		paths.putAll(walkingPaths);
+		paths.putAll(genPathsForReal(drivingMailmen, drivingShipments, PathController.getDrivingPO(), drivingDistances));
+		paths.putAll(genPathsForReal(walkingMailmen, walkingShipments, PathController.getWalkingPO(), walkingDistances));
+
+		// done!
 		return paths;
 	}
 
-	// basic paths: a simple loop for every mailman
-	protected static Map<Mailman, Path> initBasicPaths(List<Mailman> mailmen, List<Shipment> shipments, Shipment postOffice, DistanceMatrix distances) {
-		// an empty path for every mailman
-		Map<Mailman, Path> paths = new HashMap<Mailman, Path>();
-		for (Mailman m : mailmen) {
-			paths.put(m, new Path(m, postOffice));
-		}
+	// basic paths: a simple loop
+	protected static Path basicLoop(Mailman mailman, List<Shipment> shipments, Shipment postOffice, DistanceMatrix distances) {
+		Path path = new Path(mailman, postOffice);
 
-		// for every shipment, add it to the currently closest mailman
-		for (Shipment s : shipments) {
-			Mailman closest = mailmen.get(0);
-			double minDist = Double.MAX_VALUE;
-			for (Mailman m : mailmen) {
-				if (distances.getDistance(paths.get(m).getLastStep().getShipment(), s) < minDist) {
-					closest = m;
-					minDist = distances.getDistance(paths.get(m).getLastStep().getShipment(), s);
+		while (path.size() < shipments.size() + 1) {
+			Shipment closest = null;
+			for (Shipment s: shipments) {
+				if (!path.contains(s) && ((closest == null) || (distances.get(path.getLast().getShipment(), s) < distances.get(path.getLast().getShipment(), closest)))) {
+					closest = s;
 				}
 			}
-			paths.get(closest).add(s, distances);
+			path.add(closest, distances);
 		}
 
+		return path;
+	}
+
+	// actually generate the paths for each mailman
+	protected static Map<Mailman, Path> genPathsForReal(List<Mailman> mailmen, List<Shipment> shipments, Shipment postOffice, DistanceMatrix distances) {
+		Map<Mailman, Path> paths = new HashMap<Mailman, Path>();
+		paths.put(mailmen.get(0), basicLoop(mailmen.get(0), shipments, postOffice, distances));
+		for (Mailman m: mailmen) {
+			if (!paths.containsKey(m)) {
+				paths.put(m, new Path(m, postOffice));
+			}
+		}
 		return paths;
 	}
 }
+

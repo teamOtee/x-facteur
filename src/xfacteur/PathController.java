@@ -21,16 +21,11 @@ public class PathController {
 	protected static MapView mapView = new MapView();
 
 	public static void generate() {
-		items.setAll(PathGenerator.genPaths(MailmanController.getItems(), ShipmentController.getItems(), postOffice, maxTime).values());
+		items.setAll(PathGenerator.genPaths().values());
 	}
 
 	public static void display() {
 		//do something to mapView perhaps?
-		System.out.println("It worked!");
-		System.out.println("Paths generated for " + items.size() + " mailmen");
-		for (Path p: items) {
-			System.out.println(p.getMailman() + ": " + p.size() + " shipments, " + p.sumDistance() + " km");
-		}
 		if (!items.isEmpty()) {
 			pathView.reload();
 			pathView.show();
@@ -39,7 +34,8 @@ public class PathController {
 
 	public static MapView getMapView() { return mapView; }
 	public static ObservableList<Path> getItems() { return items; }
-	public static Shipment getPostOffice() { return postOffice; }
+	public static Shipment getWalkingPO() { return new Shipment(postOffice.getStreet(), postOffice.getCity(), false); }
+	public static Shipment getDrivingPO() { return new Shipment(postOffice.getStreet(), postOffice.getCity(), true); }
 	public static double getMaxTime() { return maxTime; }
 	public static void setPostOffice(Shipment postOffice) {
 		PathController.postOffice = postOffice;

@@ -57,10 +57,19 @@ public class Path {
 	public Shipment getShipment(int i) { return steps.get(i).getShipment(); }
 	public double getDistanceToNext(int i) { return steps.get(i).getDistanceToNext(); }
 	public int size() { return steps.size(); }
-	public PathStep getLastStep() { return steps.getLast(); }
+	public PathStep getLast() { return steps.getLast(); }
+
+	public boolean contains(Shipment s) {
+		for (PathStep step: steps) {
+			if (step.getShipment() == s) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	public void add(Shipment s, DistanceMatrix distanceMatrix) {
-		steps.add(new PathStep(this, s, distanceMatrix.getDistance(getLastStep().getShipment(), s)));
+		steps.add(new PathStep(this, s, distanceMatrix.get(getLast().getShipment(), s)));
 	}
 
 	public double sumDistance() {
@@ -90,20 +99,20 @@ public class Path {
 			steps.set(i1, step2);
 			steps.set(i2, step1);
 			if (i1 > 0) {
-				steps.get(i1 - 1).setDistanceToNext(distanceMatrix.getDistance(getShipment(i1 - 1), getShipment(i1)));
+				steps.get(i1 - 1).setDistanceToNext(distanceMatrix.get(getShipment(i1 - 1), getShipment(i1)));
 			}
 			if (i1 < size() - 1) {
-				steps.get(i1).setDistanceToNext(distanceMatrix.getDistance(getShipment(i1), getShipment(i1 + 1)));
+				steps.get(i1).setDistanceToNext(distanceMatrix.get(getShipment(i1), getShipment(i1 + 1)));
 			} else {
-				steps.get(i1).setDistanceToNext(distanceMatrix.getDistance(getShipment(i1), getShipment(0)));
+				steps.get(i1).setDistanceToNext(distanceMatrix.get(getShipment(i1), getShipment(0)));
 			}
 			if (i2 > 0) {
-				steps.get(i2 - 1).setDistanceToNext(distanceMatrix.getDistance(getShipment(i2), getShipment(i2)));
+				steps.get(i2 - 1).setDistanceToNext(distanceMatrix.get(getShipment(i2), getShipment(i2)));
 			}
 			if (i2 < size() - 1) {
-				steps.get(i2).setDistanceToNext(distanceMatrix.getDistance(getShipment(i2), getShipment(i2 + 1)));
+				steps.get(i2).setDistanceToNext(distanceMatrix.get(getShipment(i2), getShipment(i2 + 1)));
 			} else {
-				steps.get(i2).setDistanceToNext(distanceMatrix.getDistance(getShipment(i2), getShipment(0)));
+				steps.get(i2).setDistanceToNext(distanceMatrix.get(getShipment(i2), getShipment(0)));
 			}
 		}
 	}
