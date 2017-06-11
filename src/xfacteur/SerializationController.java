@@ -63,7 +63,7 @@ public class SerializationController {
 		}
 	}
 
-	public static void deserialization(String file1, String file2) {
+	public static void deserializationS(String file1) {
 		// Input of Shipments
 		ObjectInputStream ois = null;
 		try {
@@ -85,7 +85,9 @@ public class SerializationController {
 				ex.printStackTrace();
 			}
 		}
-
+    }
+    
+    public static void deserializationM(String file2) {
 		// Input of Mailmans
 		ObjectInputStream ois2 = null;
 		try {
