@@ -40,7 +40,7 @@ public class MailmanController {
 	}
 
 	public static void setItems(ObservableList<Mailman> items) {
-		MailmanController.items = items;
+		MailmanController.items.setAll(items);
 	}
 
 	public static void setItem(int i, Mailman m) {

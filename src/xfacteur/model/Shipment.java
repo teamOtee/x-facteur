@@ -1,6 +1,10 @@
 package xfacteur.model;
 
-public class Shipment {
+import java.io.Serializable;
+
+import xfacteur.ShipmentController;
+
+public class Shipment implements Serializable {
 	protected String street;
 	protected String city;
 	protected boolean driven;
@@ -29,6 +33,10 @@ public class Shipment {
 
 	public boolean isDriven() {
 		return driven;
+	}
+
+	public boolean equals(Shipment s) {
+		return this.toString().equals(s.toString());
 	}
 }
 

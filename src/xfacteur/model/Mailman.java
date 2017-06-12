@@ -1,6 +1,8 @@
 package xfacteur.model;
 
-public class Mailman {
+import java.io.Serializable;
+
+public class Mailman implements Serializable {
 	private boolean driver;
 	private String lastName;
 	private String name;

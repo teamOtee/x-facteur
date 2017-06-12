@@ -76,7 +76,7 @@ public class MailmanView extends Group {
 		});
 	}
 
-	protected void updateListHeader() {
+	public void updateListHeader() {
 		listHeader.setText(mailmanList.getItems().size() + " Facteur" + (mailmanList.getItems().size() != 1 ? "s" : ""));
 	}
 }

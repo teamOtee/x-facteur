@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import java.util.Optional;
 
+import xfacteur.XFacteur;
 import xfacteur.model.Shipment;
 import xfacteur.view.ShipmentView;
 import xfacteur.view.ShipmentEditModal;
@@ -41,7 +42,7 @@ public class ShipmentController {
 	}
 
 	public static void setItems(ObservableList<Shipment> items) {
-		ShipmentController.items = items;
+		ShipmentController.items.setAll(items);
 	}
 
 	public static void setItem(int i, Shipment s) {

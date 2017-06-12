@@ -55,12 +55,14 @@ public class HomePage extends Stage {
 			fileChooser.setTitle("Ouvrir des facteurs…");
 			fileChooser.getExtensionFilters().setAll(new ExtensionFilter("Fichiers facteurs","*.xmen"));
 			SerializationController.openMailmen(fileChooser.showOpenDialog(this));
+			mailmanView.updateListHeader();
 		});
 
 		openSMI.setOnAction(e -> {
 			fileChooser.setTitle("Ouvrir des envois…");
 			fileChooser.getExtensionFilters().setAll(new ExtensionFilter("Fichiers envois","*.xship"));
 			SerializationController.openShipments(fileChooser.showOpenDialog(this));
+			shipmentView.updateListHeader();
 		});
 
 		saveasMMI.setOnAction(e -> {
@@ -113,3 +115,4 @@ public class HomePage extends Stage {
 		return bordP;
 	}
 }
+

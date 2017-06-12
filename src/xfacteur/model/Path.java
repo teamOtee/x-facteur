@@ -3,6 +3,10 @@ package xfacteur.model;
 import javafx.beans.property.StringProperty;
 import javafx.beans.property.SimpleStringProperty;
 import java.util.LinkedList;
+import java.util.Arrays;
+import com.google.maps.model.DistanceMatrix;
+
+import xfacteur.PathController;
 
 //this class represents a path for a single mailman
 public class Path {
@@ -49,13 +53,13 @@ public class Path {
 	public Path(Mailman mailman, Shipment startPoint) {
 		this.mailman = mailman;
 		this.steps = new LinkedList<PathStep>();
-		steps.add(new PathStep(this, startPoint, 0));
+		steps.add(new PathStep(this, startPoint, 0.0));
 	}
 
 	public Mailman getMailman() { return mailman; }
 	public LinkedList<PathStep> getSteps() { return steps; }
-	public Shipment getShipment(int i) { return steps.get(i).getShipment(); }
-	public double getDistanceToNext(int i) { return steps.get(i).getDistanceToNext(); }
+	public Shipment getShipment(int i) { return steps.get(i % size()).getShipment(); }
+	public double getDistanceToNext(int i) { return steps.get(i % size()).getDistanceToNext(); }
 	public int size() { return steps.size(); }
 	public PathStep getLast() { return steps.getLast(); }
 
@@ -68,8 +72,9 @@ public class Path {
 		return false;
 	}
 
-	public void add(Shipment s, DistanceMatrix distanceMatrix) {
-		steps.add(new PathStep(this, s, distanceMatrix.get(getLast().getShipment(), s)));
+	public void add(Shipment s, DistanceMatrix distances) {
+		steps.getLast().setDistanceToNext(PathController.distance(steps.getLast().getShipment(), s, distances));
+		steps.add(new PathStep(this, s, 0.0));
 	}
 
 	public double sumDistance() {
@@ -82,7 +87,7 @@ public class Path {
 
 	public double sumDistance(int lim) {
 		double ret = 0.0;
-		for (int i = 0; i < lim; i++) {
+		for (int i = 0; i <= lim && i < steps.size(); i++) {
 			ret += steps.get(i).getDistanceToNext();
 		}
 		return ret;
@@ -92,27 +97,27 @@ public class Path {
 		return sumDistance(steps.indexOf(limStep));
 	}
 
-	public void swap(int i1, int i2, DistanceMatrix distanceMatrix) {
+	public void swap(int i1, int i2, DistanceMatrix distances) {
 		if ((i1 != i2) && (i1 >= 0) && (i2 >= 0) && (i1 < size()) && (i2 < size())) {
 			PathStep step1 = steps.get(i1);
 			PathStep step2 = steps.get(i2);
 			steps.set(i1, step2);
 			steps.set(i2, step1);
 			if (i1 > 0) {
-				steps.get(i1 - 1).setDistanceToNext(distanceMatrix.get(getShipment(i1 - 1), getShipment(i1)));
+				steps.get(i1 - 1).setDistanceToNext(PathController.distance(getShipment(i1 - 1), getShipment(i1), distances));
 			}
 			if (i1 < size() - 1) {
-				steps.get(i1).setDistanceToNext(distanceMatrix.get(getShipment(i1), getShipment(i1 + 1)));
+				steps.get(i1).setDistanceToNext(PathController.distance(getShipment(i1), getShipment(i1 + 1), distances));
 			} else {
-				steps.get(i1).setDistanceToNext(distanceMatrix.get(getShipment(i1), getShipment(0)));
+				steps.get(i1).setDistanceToNext(PathController.distance(getShipment(i1), getShipment(0), distances));
 			}
 			if (i2 > 0) {
-				steps.get(i2 - 1).setDistanceToNext(distanceMatrix.get(getShipment(i2), getShipment(i2)));
+				steps.get(i2 - 1).setDistanceToNext(PathController.distance(getShipment(i2), getShipment(i2), distances));
 			}
 			if (i2 < size() - 1) {
-				steps.get(i2).setDistanceToNext(distanceMatrix.get(getShipment(i2), getShipment(i2 + 1)));
+				steps.get(i2).setDistanceToNext(PathController.distance(getShipment(i2), getShipment(i2 + 1), distances));
 			} else {
-				steps.get(i2).setDistanceToNext(distanceMatrix.get(getShipment(i2), getShipment(0)));
+				steps.get(i2).setDistanceToNext(PathController.distance(getShipment(i2), getShipment(0), distances));
 			}
 		}
 	}

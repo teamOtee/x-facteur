@@ -71,7 +71,8 @@ public class PathView extends Stage {
 			pathTable.getColumns().setAll(shipmentCol, distanceToNextCol, sumDistanceCol);
 			
 			container.getChildren().addAll(header, pathTable);
-			tabs.getTabs().add(new Tab(path.getMailman().getName().charAt(0) + ". " + path.getMailman().getLastName(), container));
+			String tabName = path.getMailman().getName().charAt(0) + ". " + path.getMailman().getLastName() + " (" + path.size() + ")";
+			tabs.getTabs().add(new Tab(tabName, container));
 		}
 	}
 

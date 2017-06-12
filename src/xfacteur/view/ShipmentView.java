@@ -10,6 +10,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.collections.ListChangeListener;
+
 import xfacteur.ShipmentController;
 import xfacteur.model.Shipment;
 
@@ -75,8 +77,7 @@ public class ShipmentView extends Group {
 		});
 	}
 
-	protected void updateListHeader() {
-		listHeader
-				.setText(shipmentList.getItems().size() + " Envoi" + (shipmentList.getItems().size() != 1 ? "s" : ""));
+	public void updateListHeader() {
+		listHeader.setText(shipmentList.getItems().size() + " Envoi" + (shipmentList.getItems().size() != 1 ? "s" : ""));
 	}
 }
