@@ -92,8 +92,8 @@ public class PathGenerator {
 		boolean cont = true;
 		System.out.println("optimize…");
 		// while it is possible to improve
-		while (cont) {
-			cont = false;
+		//while (cont) {
+		//	cont = false;
 			// for each step i
 			for (int i = 0; i < path.size(); i++) {
 				// for each step j ≠ i, i-1, i+1
@@ -119,7 +119,7 @@ public class PathGenerator {
 					}
 				}
 			}
-		}
+		//}
 		System.out.println("optimized!");
 		return path;
 	}

@@ -28,7 +28,7 @@ public class PathView extends Stage {
 
 	// constructor
 	public PathView() {
-		this.setTitle("Affichage d’un chemin — X Facteur");
+		this.setTitle("Affichage des chemins — X Facteur");
 		this.getIcons().add(new Image(XFacteur.LOGOPATH));
 		this.setResizable(false);
 		this.setScene(new Scene(container));
